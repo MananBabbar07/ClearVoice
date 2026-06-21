@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from sentence_transformers import SentenceTransformer
 from database import get_connection
 
-load_dotenv()
+load_dotenv(dotenv_path="E:/ClearVoice/.env", override=True)
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
