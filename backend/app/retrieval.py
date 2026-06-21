@@ -30,7 +30,7 @@ def get_similar_papers(claim: str, top_k: int = 5) -> list:
 
 
 if __name__ == "__main__":
-    claim = "Vitamin C can cure cancer"
+    claim = input("Enter a health claim: ")
     papers = get_similar_papers(claim)
     for p in papers:
         print(f"\n[{p['similarity']:.2f}] {p['title']} ({p['year']})")
