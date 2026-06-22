@@ -25,6 +25,8 @@ app.add_middleware(
 
 cache = redis.Redis.from_url(os.getenv("REDIS_URL"), decode_responses=True)
 
+CACHE_TTL = 60 * 60 * 24  # 24 hours
+
 
 class ClaimRequest(BaseModel):
     claim: str
@@ -52,12 +54,19 @@ def verify_claim(request: ClaimRequest):
     if not claim:
         raise HTTPException(status_code=400, detail="Claim cannot be empty")
 
-   
+    
+    cached = cache.get(claim)
+    if cached:
+        result = json.loads(cached)
+        result["cached"] = True
+        return result
+
     papers = get_similar_papers(claim)
 
     if not papers:
         raise HTTPException(status_code=404, detail="No relevant papers found")
 
+   
     verdict = get_verdict(claim, papers)
 
     verdict["papers"] = [
@@ -70,5 +79,8 @@ def verify_claim(request: ClaimRequest):
         }
         for p in papers
     ]
+    verdict["cached"] = False
+
+    cache.setex(claim, CACHE_TTL, json.dumps(verdict))
 
     return verdict
