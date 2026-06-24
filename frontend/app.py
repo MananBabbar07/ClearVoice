@@ -41,18 +41,18 @@ if st.button("Verify Claim", type="primary"):
                 confidence = data.get("confidence", 0)
 
                 if verdict == "TRUE":
-                    st.success(f"✅ Verdict: {verdict}")
+                    st.success(f" Verdict: {verdict}")
                 elif verdict == "FALSE":
-                    st.error(f"❌ Verdict: {verdict}")
+                    st.error(f" Verdict: {verdict}")
                 elif verdict == "MISLEADING":
-                    st.warning(f"⚠️ Verdict: {verdict}")
+                    st.warning(f" Verdict: {verdict}")
                 else:
                     st.info(f"ℹ️ Verdict: {verdict}")
 
                 st.metric("Confidence", f"{confidence * 100:.0f}%")
 
                 if data.get("cached"):
-                    st.caption("⚡ Result served from cache")
+                    st.caption(" Result served from cache")
 
                 st.divider()
 
