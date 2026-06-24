@@ -9,8 +9,7 @@ from dotenv import load_dotenv
 import redis
 import json
 
-load_dotenv(dotenv_path="E:/ClearVoice/.env", override=True)
-
+load_dotenv()
 from retrieval import get_similar_papers
 from verify import get_verdict
 

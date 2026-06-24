@@ -3,8 +3,7 @@ from psycopg2.extras import RealDictCursor
 import os
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path="E:/ClearVoice/.env", override=True)
-
+load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 
