@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import json
 
-API_URL = "http://localhost:8000"
+API_URL = "https://manan77709-clearvoice-api.hf.space"
 
 st.set_page_config(
     page_title="ClearVoice",
