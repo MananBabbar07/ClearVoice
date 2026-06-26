@@ -16,3 +16,31 @@ TEST_CLAIMS = [
     "sugar causes diabetes",
     "stress causes high blood pressure",
 ]
+def run_benchmark():
+    results = []
+
+    for claim in TEST_CLAIMS:
+        print(f"Testing: {claim}")
+        start = time.time()
+
+        response = requests.post(
+            f"{API_URL}/verify",
+            json={"claim": claim}
+        )
+
+        elapsed = round(time.time() - start, 2)
+        data = response.json()
+
+        results.append({
+            "claim": claim,
+            "verdict": data.get("verdict"),
+            "confidence": data.get("confidence"),
+            "top_similarity": data.get("papers", [{}])[0].get("similarity", 0),
+            "time_seconds": elapsed,
+            "cached": data.get("cached")
+        })
+
+        print(f"  → {data.get('verdict')} ({data.get('confidence')}) in {elapsed}s")
+        time.sleep(1)
+
+    return results
