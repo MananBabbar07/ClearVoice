@@ -1,6 +1,5 @@
 import os
 import time
-import psycopg2
 from dotenv import load_dotenv
 from Bio import Entrez
 from sentence_transformers import SentenceTransformer
@@ -21,6 +20,25 @@ SEARCH_TERMS = [
     "blood pressure",
     "heart disease prevention",
     "antibiotic resistance",
+    "smoking lung cancer",
+    "vitamin C common cold",
+    "sugar insulin resistance",
+    "stress hypertension",
+    "autism spectrum disorder",
+    "vaccine adverse effects",
+    "mental health depression",
+    "sleep deprivation effects",
+    "intermittent fasting",
+    "obesity metabolic syndrome",
+    "alcohol liver disease",
+    "exercise mental health",
+    "gut microbiome health",
+    "meditation stress reduction",
+    "processed food inflammation",
+    "statin heart disease",
+    "homeopathy clinical evidence",
+    "essential oils therapeutic effects",
+    "acupuncture pain management",
 ]
 
 
@@ -75,10 +93,11 @@ def store_papers(papers: list):
     cur = conn.cursor()
     stored = 0
 
-    for paper in papers:
-        try:
-            embedding = model.encode(paper["abstract"]).tolist()
+    abstracts = [paper["abstract"] for paper in papers]
+    embeddings = model.encode(abstracts, batch_size=64, show_progress_bar=True).tolist()
 
+    for paper, embedding in zip(papers, embeddings):
+        try:
             cur.execute("""
                 INSERT INTO studies (pmid, title, abstract, authors, year, journal, embedding)
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
@@ -115,7 +134,7 @@ def run_ingestion(max_per_term: int = 500):
         print(f"  Fetched {len(papers)} abstracts")
         store_papers(papers)
         total += len(papers)
-        time.sleep(1)  # be polite to NCBI API
+        time.sleep(1)
 
     print(f"\nIngestion complete. Total papers processed: {total}")
 
