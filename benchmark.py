@@ -16,6 +16,7 @@ TEST_CLAIMS = [
     "sugar causes diabetes",
     "stress causes high blood pressure",
 ]
+
 def run_benchmark():
     results = []
 
@@ -44,3 +45,29 @@ def run_benchmark():
         time.sleep(1)
 
     return results
+
+
+def save_results(results):
+    with open("phase1_baseline.csv", "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=results[0].keys())
+        writer.writeheader()
+        writer.writerows(results)
+    print("\nSaved to phase1_baseline.csv")
+
+
+def print_summary(results):
+    avg_confidence = round(sum(r["confidence"] for r in results) / len(results), 2)
+    avg_similarity = round(sum(r["top_similarity"] for r in results) / len(results), 2)
+    avg_time = round(sum(r["time_seconds"] for r in results) / len(results), 2)
+
+    print("\n=== PHASE 1 BASELINE SUMMARY ===")
+    print(f"Total claims tested : {len(results)}")
+    print(f"Avg confidence      : {avg_confidence}")
+    print(f"Avg top similarity  : {avg_similarity}")
+    print(f"Avg response time   : {avg_time}s")
+
+
+if __name__ == "__main__":
+    results = run_benchmark()
+    save_results(results)
+    print_summary(results)
