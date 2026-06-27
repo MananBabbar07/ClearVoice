@@ -9,7 +9,11 @@ load_dotenv()
 
 Entrez.email = os.getenv("NCBI_EMAIL", "your@email.com")
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
+# Keep MiniLM for backwards compatibility
+minilm_model = SentenceTransformer("all-MiniLM-L6-v2")
+
+# BioBERT for Phase 2
+biobert_model = SentenceTransformer("dmis-lab/biobert-base-cased-v1.2")
 
 SEARCH_TERMS = [
     "cancer treatment",
@@ -94,14 +98,15 @@ def store_papers(papers: list):
     stored = 0
 
     abstracts = [paper["abstract"] for paper in papers]
-    embeddings = model.encode(abstracts, batch_size=64, show_progress_bar=True).tolist()
+    biobert_embeddings = biobert_model.encode(abstracts, batch_size=32, show_progress_bar=True).tolist()
 
-    for paper, embedding in zip(papers, embeddings):
+    for paper, biobert_emb in zip(papers, biobert_embeddings):
         try:
             cur.execute("""
-                INSERT INTO studies (pmid, title, abstract, authors, year, journal, embedding)
+                INSERT INTO studies (pmid, title, abstract, authors, year, journal, biobert_embedding)
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
-                ON CONFLICT (pmid) DO NOTHING
+                ON CONFLICT (pmid) DO UPDATE
+                SET biobert_embedding = EXCLUDED.biobert_embedding
             """, (
                 paper["pmid"],
                 paper["title"],
@@ -109,7 +114,7 @@ def store_papers(papers: list):
                 paper["authors"],
                 paper["year"],
                 paper["journal"],
-                embedding,
+                biobert_emb,
             ))
             stored += 1
 
