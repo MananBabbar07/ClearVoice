@@ -1,11 +1,11 @@
 claim,verdict,confidence,top_similarity,time_seconds,cached
-antibiotics can cure the flu,FALSE,0.9,0.51,1.99,True
-exercise reduces risk of heart disease,TRUE,0.8,0.49,1.2,True
-smoking causes lung cancer,INSUFFICIENT EVIDENCE,0.4,0.42,1.17,True
-vitamin C prevents colds,INSUFFICIENT EVIDENCE,0.0,0.32,1.15,True
-vaccines cause autism,FALSE,0.9,0.53,1.16,True
-obesity is linked to type 2 diabetes,TRUE,0.8,0.54,1.14,True
-drinking bleach cures infections,FALSE,0.9,0.38,1.15,True
-high blood pressure increases stroke risk,TRUE,0.8,0.46,3.76,True
-sugar causes diabetes,INSUFFICIENT EVIDENCE,0.6,0.46,1.17,True
-stress causes high blood pressure,TRUE,0.8,0.38,1.13,True
+antibiotics can cure the flu,FALSE,0.9,0.52,4.46,False
+exercise reduces risk of heart disease,TRUE,0.9,0.72,5.76,False
+smoking causes lung cancer,TRUE,0.9,0.66,9.04,False
+vitamin C prevents colds,MISLEADING,0.8,0.8,5.52,False
+vaccines cause autism,FALSE,0.9,0.6,7.96,False
+obesity is linked to type 2 diabetes,TRUE,0.9,0.61,5.85,False
+drinking bleach cures infections,FALSE,1.0,0.43,4.68,False
+high blood pressure increases stroke risk,TRUE,0.8,0.58,7.22,False
+sugar causes diabetes,ERROR,0.0,0.62,5.34,False
+stress causes high blood pressure,TRUE,0.8,0.53,6.28,False
