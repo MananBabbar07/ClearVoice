@@ -2,7 +2,7 @@ import requests
 import time
 import csv
 
-API_URL = "http://localhost:8000"
+API_URL = "https://manan77709-clearvoice-api.hf.space"
 
 TEST_CLAIMS = [
     "antibiotics can cure the flu",
