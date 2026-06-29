@@ -62,3 +62,10 @@ Respond with JSON only."""
         }
 
 
+if __name__ == "__main__":
+    from retrieval import get_similar_papers
+    claim = input("Enter a health claim: ")
+    papers = get_similar_papers(claim)
+    result = detect_contradiction(claim, papers)
+    import json
+    print(json.dumps(result, indent=2))
