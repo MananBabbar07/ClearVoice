@@ -13,7 +13,7 @@ Entrez.email = os.getenv("NCBI_EMAIL", "your@email.com")
 minilm_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 # BioBERT for Phase 2
-biobert_model = SentenceTransformer("dmis-lab/biobert-base-cased-v1.2")
+biobert_model = SentenceTransformer("NeuML/pubmedbert-base-embeddings", device="cuda")
 
 SEARCH_TERMS = [
     "cancer treatment",

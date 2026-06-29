@@ -4,8 +4,7 @@ from sentence_transformers import SentenceTransformer
 from database import get_connection
 
 load_dotenv()
-
-model = SentenceTransformer("all-MiniLM-L6-v2")
+model = SentenceTransformer("NeuML/pubmedbert-base-embeddings")
 
 
 def get_similar_papers(claim: str, top_k: int = 5) -> list:
@@ -16,9 +15,10 @@ def get_similar_papers(claim: str, top_k: int = 5) -> list:
 
     cur.execute("""
         SELECT pmid, title, abstract, authors, year, journal,
-               1 - (embedding <=> %s::vector) AS similarity
+               1 - (biobert_embedding <=> %s::vector) AS similarity
         FROM studies
-        ORDER BY embedding <=> %s::vector
+        WHERE biobert_embedding IS NOT NULL
+        ORDER BY biobert_embedding <=> %s::vector
         LIMIT %s
     """, (embedding, embedding, top_k))
 
