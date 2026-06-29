@@ -63,10 +63,12 @@ if st.button("Verify Claim", type="primary"):
                 if citations:
                     st.markdown("### Citations")
                     for c in citations:
-                        if c.get("pmid") and c["pmid"] != "not available":
-                            st.markdown(f"- **{c['title']}** — [PubMed](https://pubmed.ncbi.nlm.nih.gov/{c['pmid']}/)")
+                        pmid = c.get("pmid", "")
+                        title = c.get("title", "")
+                        if pmid and pmid.isdigit():
+                            st.markdown(f"- **{title}** — [PubMed](https://pubmed.ncbi.nlm.nih.gov/{pmid}/)")
                         else:
-                            st.markdown(f"- {c.get('title', '')}")
+                            st.markdown(f"- **{title}**")
 
                 st.divider()
 

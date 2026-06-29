@@ -27,6 +27,9 @@ USER CLAIM: "{claim}"
 RELEVANT STUDIES:
 {context}
 
+IMPORTANT: Use only the exact PMIDs provided in the studies above for citations.
+Do not use "not available" or "not provided" — only cite papers with real PMIDs from the list above.
+
 Based on these studies, evaluate the claim and respond in this exact JSON format:
 {{
     "verdict": "TRUE" or "FALSE" or "MISLEADING" or "INSUFFICIENT EVIDENCE",
@@ -34,7 +37,7 @@ Based on these studies, evaluate the claim and respond in this exact JSON format
     "explanation": "2-3 sentence explanation of your verdict",
     "citations": [
         {{
-            "pmid": "the pmid",
+            "pmid": "the exact pmid from the studies above",
             "title": "the title",
             "relevance": "one sentence on why this paper is relevant"
         }}
