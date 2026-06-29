@@ -1,6 +1,7 @@
 import sys
 import os
 import json
+from concurrent.futures import ThreadPoolExecutor
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "app"))
 
 from fastapi import FastAPI, HTTPException
@@ -13,6 +14,7 @@ load_dotenv()
 
 from retrieval import get_similar_papers
 from verify import get_verdict
+from agents.judge import judge_papers
 
 app = FastAPI(title="ClearVoice API", version="2.0.0")
 
@@ -65,7 +67,13 @@ def verify_claim(request: ClaimRequest):
     if not papers:
         raise HTTPException(status_code=404, detail="No relevant papers found")
 
-    verdict = get_verdict(claim, papers)
+    # Run verdict and judge in parallel
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        verdict_future = executor.submit(get_verdict, claim, papers)
+        judge_future = executor.submit(judge_papers, claim, papers)
+
+        verdict = verdict_future.result()
+        judge_result = judge_future.result()
 
     verdict["papers"] = [
         {
@@ -77,6 +85,7 @@ def verify_claim(request: ClaimRequest):
         }
         for p in papers
     ]
+    verdict["judge"] = judge_result
     verdict["cached"] = False
 
     cache.setex(claim, CACHE_TTL, json.dumps(verdict))
