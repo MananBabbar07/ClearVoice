@@ -1,5 +1,6 @@
 import sys
 import os
+import json
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "app"))
 
 from fastapi import FastAPI, HTTPException
@@ -7,13 +8,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import redis
-import json
 
 load_dotenv()
+
 from retrieval import get_similar_papers
 from verify import get_verdict
 
-app = FastAPI(title="ClearVoice API", version="1.0.0")
+app = FastAPI(title="ClearVoice API", version="2.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,7 +25,7 @@ app.add_middleware(
 
 cache = redis.Redis.from_url(os.getenv("REDIS_URL"), decode_responses=True)
 
-CACHE_TTL = 60 * 60 * 24  # 24 hours
+CACHE_TTL = 60 * 60 * 24
 
 
 class ClaimRequest(BaseModel):
@@ -33,7 +34,7 @@ class ClaimRequest(BaseModel):
 
 @app.get("/")
 def root():
-    return {"status": "ClearVoice API is running"}
+    return {"status": "ClearVoice API is running", "version": "2.0.0"}
 
 
 @app.get("/health")
@@ -53,7 +54,6 @@ def verify_claim(request: ClaimRequest):
     if not claim:
         raise HTTPException(status_code=400, detail="Claim cannot be empty")
 
-    
     cached = cache.get(claim)
     if cached:
         result = json.loads(cached)
@@ -65,7 +65,6 @@ def verify_claim(request: ClaimRequest):
     if not papers:
         raise HTTPException(status_code=404, detail="No relevant papers found")
 
-   
     verdict = get_verdict(claim, papers)
 
     verdict["papers"] = [

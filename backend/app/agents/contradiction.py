@@ -1,8 +1,11 @@
 import os
+import json
 from groq import Groq
 from dotenv import load_dotenv
 
 load_dotenv()
+
+print("KEY:", repr(os.getenv("GROQ_API_KEY")))
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
@@ -49,7 +52,6 @@ Respond with JSON only."""
 
     raw = response.choices[0].message.content.strip()
 
-    import json
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
@@ -63,9 +65,10 @@ Respond with JSON only."""
 
 
 if __name__ == "__main__":
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     from retrieval import get_similar_papers
     claim = input("Enter a health claim: ")
     papers = get_similar_papers(claim)
     result = detect_contradiction(claim, papers)
-    import json
     print(json.dumps(result, indent=2))

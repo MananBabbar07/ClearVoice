@@ -1,8 +1,10 @@
 import os
+import json
 from groq import Groq
 from dotenv import load_dotenv
 
 load_dotenv()
+
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 
@@ -55,7 +57,6 @@ def get_verdict(claim: str, papers: list) -> dict:
 
     raw = response.choices[0].message.content.strip()
 
-    import json
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
@@ -68,11 +69,11 @@ def get_verdict(claim: str, papers: list) -> dict:
 
 
 if __name__ == "__main__":
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from retrieval import get_similar_papers
 
     claim = input("Enter a health claim: ")
     papers = get_similar_papers(claim)
     verdict = get_verdict(claim, papers)
-
-    import json
     print(json.dumps(verdict, indent=2))
