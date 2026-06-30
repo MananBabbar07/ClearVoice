@@ -30,7 +30,7 @@ if st.button("Verify Claim", type="primary"):
                 response = requests.post(
                     f"{API_URL}/verify",
                     json={"claim": claim},
-                    timeout=60
+                    timeout=90
                 )
                 data = response.json()
 
@@ -38,6 +38,7 @@ if st.button("Verify Claim", type="primary"):
 
                 verdict = data.get("verdict", "UNKNOWN")
                 confidence = data.get("confidence", 0)
+                evidence_strength = data.get("evidence_strength", "")
 
                 if verdict == "TRUE":
                     st.success(f"✅ Verdict: {verdict}")
@@ -48,34 +49,55 @@ if st.button("Verify Claim", type="primary"):
                 else:
                     st.info(f"ℹ️ Verdict: {verdict}")
 
-                st.metric("Confidence", f"{confidence * 100:.0f}%")
+                col1, col2 = st.columns(2)
+                col1.metric("Confidence", f"{confidence * 100:.0f}%")
+                col2.metric("Evidence Strength", evidence_strength)
 
                 if data.get("cached"):
                     st.caption("⚡ Result served from cache")
 
+                # Decomposition
+                decomposition = data.get("decomposition", {})
+                if decomposition.get("is_complex"):
+                    st.info(f"🔍 Complex claim detected — analyzed {len(decomposition.get('sub_claims', []))} sub-claims")
+                    for i, sc in enumerate(decomposition.get("sub_claims", []), 1):
+                        st.caption(f"{i}. {sc}")
+
                 st.divider()
 
-                st.markdown("### Explanation")
-                st.write(data.get("explanation", ""))
+                # Plain English
+                plain_english = data.get("plain_english", "")
+                if plain_english:
+                    st.markdown("### 💬 In Plain English")
+                    st.write(plain_english)
 
-                # Citations
-                citations = data.get("citations", [])
-                if citations:
-                    st.markdown("### Citations")
-                    for c in citations:
-                        pmid = c.get("pmid", "")
-                        title = c.get("title", "")
-                        if pmid and pmid.isdigit():
-                            st.markdown(f"- **{title}** — [PubMed](https://pubmed.ncbi.nlm.nih.gov/{pmid}/)")
-                        else:
-                            st.markdown(f"- **{title}**")
+                takeaway = data.get("takeaway", "")
+                if takeaway:
+                    st.info(f"💡 **Takeaway:** {takeaway}")
+
+                st.divider()
+
+                # Technical explanation
+                with st.expander("🔬 Technical Explanation"):
+                    st.write(data.get("explanation", ""))
+
+                    citations = data.get("citations", [])
+                    if citations:
+                        st.markdown("**Citations:**")
+                        for c in citations:
+                            pmid = c.get("pmid", "")
+                            title = c.get("title", "")
+                            if pmid and pmid.isdigit():
+                                st.markdown(f"- **{title}** — [PubMed](https://pubmed.ncbi.nlm.nih.gov/{pmid}/)")
+                            else:
+                                st.markdown(f"- **{title}**")
 
                 st.divider()
 
                 # Judge agent results
                 judge = data.get("judge", {})
                 if judge:
-                    st.markdown("### Evidence Quality Analysis")
+                    st.markdown("### 📊 Evidence Quality Analysis")
 
                     overall_quality = judge.get("overall_quality", "UNKNOWN")
                     quality_explanation = judge.get("quality_explanation", "")
