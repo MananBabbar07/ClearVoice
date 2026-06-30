@@ -1,29 +1,30 @@
 import os
 import json
+import time
 from groq import Groq
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-STUDY_QUALITY = {
-    "meta-analysis": 5,
-    "systematic review": 5,
-    "rct": 5,
-    "randomized controlled trial": 5,
-    "cohort": 3,
-    "case-control": 3,
-    "cross-sectional": 2,
-    "case report": 1,
-    "case study": 1,
-    "opinion": 1,
-    "review": 2,
-    "unknown": 1
-}
+
+def extract_json(raw: str) -> dict:
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        pass
+    try:
+        start = raw.find("{")
+        end = raw.rfind("}") + 1
+        if start != -1 and end != 0:
+            return json.loads(raw[start:end])
+    except json.JSONDecodeError:
+        pass
+    return None
 
 
-def judge_papers(claim: str, papers: list) -> dict:
+def judge_papers(claim: str, papers: list, retries: int = 3) -> dict:
     context = ""
     for i, paper in enumerate(papers, 1):
         context += f"""
@@ -55,24 +56,32 @@ For each paper respond in this exact JSON format:
     "quality_explanation": "one sentence explaining the overall evidence quality"
 }}
 
-Respond with JSON only."""
+Respond with JSON only. No extra text, no markdown formatting, no backticks."""
 
-    response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.1,
-    )
+    for attempt in range(retries):
+        try:
+            response = client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.1,
+            )
 
-    raw = response.choices[0].message.content.strip()
+            raw = response.choices[0].message.content.strip()
+            raw = raw.replace("```json", "").replace("```", "").strip()
 
-    try:
-        return json.loads(raw)
-    except json.JSONDecodeError:
-        return {
-            "papers": [],
-            "overall_quality": "UNKNOWN",
-            "quality_explanation": "Could not assess study quality."
-        }
+            result = extract_json(raw)
+            if result is not None:
+                return result
+
+        except Exception as e:
+            print(f"Judge attempt {attempt+1} failed: {e}")
+            time.sleep(2)
+
+    return {
+        "papers": [],
+        "overall_quality": "UNKNOWN",
+        "quality_explanation": "Could not assess study quality."
+    }
 
 
 if __name__ == "__main__":
