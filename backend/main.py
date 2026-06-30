@@ -15,6 +15,8 @@ load_dotenv()
 from retrieval import get_similar_papers
 from verify import get_verdict
 from agents.judge import judge_papers
+from agents.decomposer import decompose_claim
+from agents.explainer import explain_verdict
 
 app = FastAPI(title="ClearVoice API", version="2.0.0")
 
@@ -32,6 +34,19 @@ CACHE_TTL = 60 * 60 * 24
 
 class ClaimRequest(BaseModel):
     claim: str
+
+
+def determine_final_verdict(verdict: dict, judge_result: dict) -> dict:
+    papers = judge_result.get("papers", [])
+    supports = sum(1 for p in papers if p.get("stance") == "SUPPORTS")
+    contradicts = sum(1 for p in papers if p.get("stance") == "CONTRADICTS")
+
+    if supports > 0 and contradicts > 0:
+        verdict["verdict"] = "MISLEADING"
+        verdict["confidence"] = min(verdict.get("confidence", 0.5), 0.7)
+        verdict["explanation"] = verdict.get("explanation", "") + f" Note: Evidence is mixed — {supports} paper(s) support and {contradicts} paper(s) contradict this claim."
+
+    return verdict
 
 
 @app.get("/")
@@ -62,18 +77,34 @@ def verify_claim(request: ClaimRequest):
         result["cached"] = True
         return result
 
-    papers = get_similar_papers(claim)
+    if " and " in claim.lower() or " or " in claim.lower():
+        decomposition = decompose_claim(claim)
+    else:
+        decomposition = {"is_complex": False, "sub_claims": [claim], "original_claim": claim}
+
+    primary_claim = decomposition["sub_claims"][0]
+
+    papers = get_similar_papers(primary_claim)
 
     if not papers:
         raise HTTPException(status_code=404, detail="No relevant papers found")
 
-    # Run verdict and judge in parallel
     with ThreadPoolExecutor(max_workers=2) as executor:
-        verdict_future = executor.submit(get_verdict, claim, papers)
-        judge_future = executor.submit(judge_papers, claim, papers)
+        verdict_future = executor.submit(get_verdict, primary_claim, papers)
+        judge_future = executor.submit(judge_papers, primary_claim, papers)
 
         verdict = verdict_future.result()
         judge_result = judge_future.result()
+
+    verdict = determine_final_verdict(verdict, judge_result)
+
+    explanation_result = explain_verdict(
+        claim=claim,
+        verdict=verdict.get("verdict", ""),
+        confidence=verdict.get("confidence", 0),
+        explanation=verdict.get("explanation", ""),
+        judge_result=judge_result
+    )
 
     verdict["papers"] = [
         {
@@ -86,6 +117,10 @@ def verify_claim(request: ClaimRequest):
         for p in papers
     ]
     verdict["judge"] = judge_result
+    verdict["decomposition"] = decomposition
+    verdict["plain_english"] = explanation_result.get("plain_english", "")
+    verdict["takeaway"] = explanation_result.get("takeaway", "")
+    verdict["evidence_strength"] = explanation_result.get("evidence_strength", "")
     verdict["cached"] = False
 
     cache.setex(claim, CACHE_TTL, json.dumps(verdict))

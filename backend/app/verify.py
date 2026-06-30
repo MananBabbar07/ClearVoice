@@ -1,5 +1,6 @@
 import os
 import json
+import time
 from groq import Groq
 from dotenv import load_dotenv
 
@@ -8,11 +9,27 @@ load_dotenv(override=True)
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 
+def extract_json(raw: str) -> dict:
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        pass
+    try:
+        start = raw.find("{")
+        end = raw.rfind("}") + 1
+        if start != -1 and end != 0:
+            return json.loads(raw[start:end])
+    except json.JSONDecodeError:
+        pass
+    return None
+
+
 def build_prompt(claim: str, papers: list) -> str:
     context = ""
     for i, paper in enumerate(papers, 1):
         context += f"""
 Paper {i}:
+PMID: {paper['pmid']}
 Title: {paper['title']}
 Journal: {paper['journal']} ({paper['year']})
 Abstract: {paper['abstract'][:500]}
@@ -44,31 +61,39 @@ Based on these studies, evaluate the claim and respond in this exact JSON format
     ]
 }}
 
-Respond with JSON only. No extra text."""
+Respond with JSON only. No extra text, no markdown formatting, no backticks."""
 
     return prompt
 
 
-def get_verdict(claim: str, papers: list) -> dict:
+def get_verdict(claim: str, papers: list, retries: int = 3) -> dict:
     prompt = build_prompt(claim, papers)
 
-    response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.1,
-    )
+    for attempt in range(retries):
+        try:
+            response = client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.1,
+            )
 
-    raw = response.choices[0].message.content.strip()
+            raw = response.choices[0].message.content.strip()
+            raw = raw.replace("```json", "").replace("```", "").strip()
 
-    try:
-        return json.loads(raw)
-    except json.JSONDecodeError:
-        return {
-            "verdict": "ERROR",
-            "confidence": 0.0,
-            "explanation": "Failed to parse LLM response.",
-            "citations": []
-        }
+            result = extract_json(raw)
+            if result is not None:
+                return result
+
+        except Exception as e:
+            print(f"Verdict attempt {attempt+1} failed: {e}")
+            time.sleep(2)
+
+    return {
+        "verdict": "ERROR",
+        "confidence": 0.0,
+        "explanation": "Failed to parse LLM response after retries.",
+        "citations": []
+    }
 
 
 if __name__ == "__main__":
