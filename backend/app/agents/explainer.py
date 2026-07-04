@@ -1,15 +1,16 @@
 import os
 import json
-import time
-from groq import Groq
 from dotenv import load_dotenv
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from groq_client import call_groq
 
 load_dotenv(override=True)
 
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-
 
 def extract_json(raw: str) -> dict:
+    if not raw:
+        return None
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
@@ -24,7 +25,7 @@ def extract_json(raw: str) -> dict:
     return None
 
 
-def explain_verdict(claim: str, verdict: str, confidence: float, explanation: str, judge_result: dict, retries: int = 3) -> dict:
+def explain_verdict(claim: str, verdict: str, confidence: float, explanation: str, judge_result: dict) -> dict:
     overall_quality = judge_result.get("overall_quality", "UNKNOWN")
     quality_explanation = judge_result.get("quality_explanation", "")
 
@@ -52,24 +53,10 @@ Respond in this exact JSON format:
 
 Respond with JSON only. No extra text, no markdown formatting, no backticks."""
 
-    for attempt in range(retries):
-        try:
-            response = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.1,
-            )
-
-            raw = response.choices[0].message.content.strip()
-            raw = raw.replace("```json", "").replace("```", "").strip()
-
-            result = extract_json(raw)
-            if result is not None:
-                return result
-
-        except Exception as e:
-            print(f"Explainer attempt {attempt+1} failed: {e}")
-            time.sleep(2)
+    raw = call_groq(prompt)
+    result = extract_json(raw)
+    if result is not None:
+        return result
 
     return {
         "plain_english": explanation,

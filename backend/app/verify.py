@@ -1,15 +1,16 @@
+
 import os
 import json
-import time
-from groq import Groq
 from dotenv import load_dotenv
+from groq_client import call_groq
+
 
 load_dotenv(override=True)
 
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-
 
 def extract_json(raw: str) -> dict:
+    if not raw:
+        return None
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
@@ -66,32 +67,18 @@ Respond with JSON only. No extra text, no markdown formatting, no backticks."""
     return prompt
 
 
-def get_verdict(claim: str, papers: list, retries: int = 3) -> dict:
+def get_verdict(claim: str, papers: list) -> dict:
     prompt = build_prompt(claim, papers)
+    raw = call_groq(prompt)
 
-    for attempt in range(retries):
-        try:
-            response = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.1,
-            )
-
-            raw = response.choices[0].message.content.strip()
-            raw = raw.replace("```json", "").replace("```", "").strip()
-
-            result = extract_json(raw)
-            if result is not None:
-                return result
-
-        except Exception as e:
-            print(f"Verdict attempt {attempt+1} failed: {e}")
-            time.sleep(2)
+    result = extract_json(raw)
+    if result is not None:
+        return result
 
     return {
         "verdict": "ERROR",
         "confidence": 0.0,
-        "explanation": "Failed to parse LLM response after retries.",
+        "explanation": "Failed to parse LLM response.",
         "citations": []
     }
 

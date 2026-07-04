@@ -1,14 +1,16 @@
 import os
 import json
-import time
-from groq import Groq
 from dotenv import load_dotenv
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from groq_client import call_groq
 
 load_dotenv(override=True)
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 
 def extract_json(raw: str) -> dict:
+    if not raw:
+        return None
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
@@ -23,7 +25,7 @@ def extract_json(raw: str) -> dict:
     return None
 
 
-def decompose_claim(claim: str, retries: int = 3) -> dict:
+def decompose_claim(claim: str) -> dict:
     prompt = f"""You are a medical claim analyzer. Break down the following health claim into simple sub-claims if it contains multiple assertions.
 
 CLAIM: "{claim}"
@@ -42,24 +44,10 @@ Rules:
 
 Respond with JSON only. No extra text, no markdown formatting, no backticks."""
 
-    for attempt in range(retries):
-        try:
-            response = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.1,
-            )
-
-            raw = response.choices[0].message.content.strip()
-            raw = raw.replace("```json", "").replace("```", "").strip()
-
-            result = extract_json(raw)
-            if result is not None:
-                return result
-
-        except Exception as e:
-            print(f"Decomposer attempt {attempt+1} failed: {e}")
-            time.sleep(2)
+    raw = call_groq(prompt)
+    result = extract_json(raw)
+    if result is not None:
+        return result
 
     return {
         "is_complex": False,
