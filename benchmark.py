@@ -2,7 +2,8 @@ import requests
 import time
 import csv
 
-API_URL = "https://manan77709-clearvoice-api.hf.space"
+# API_URL = "https://manan77709-clearvoice-api.hf.space"
+API_URL = "http://localhost:8000"
 
 TEST_CLAIMS = [
     "antibiotics can cure the flu",
@@ -23,7 +24,7 @@ def verify_claim(claim, retries=3, delay=5):
             response = requests.post(
                 f"{API_URL}/verify",
                 json={"claim": claim},
-                timeout=30
+                timeout=60
             )
             if response.status_code == 200:
                 return response.json()
@@ -32,6 +33,7 @@ def verify_claim(claim, retries=3, delay=5):
         except Exception as e:
             print(f"  Attempt {attempt+1} error: {e}")
         time.sleep(delay)
+    print(f"  → ERROR after 3 attempts")
     return None
 
 def run_benchmark():
@@ -48,7 +50,7 @@ def run_benchmark():
                 "claim": claim,
                 "verdict": data.get("verdict"),
                 "confidence": data.get("confidence"),
-                "top_similarity": data.get("papers", [{}])[0].get("similarity", 0),
+                "top_similarity": data.get("papers", [{}])[0].get("similarity", 0) if data.get("papers") else 0,
                 "time_seconds": elapsed,
                 "cached": data.get("cached")
             })
@@ -62,9 +64,9 @@ def run_benchmark():
                 "time_seconds": elapsed,
                 "cached": False
             })
-            print(f"  → ERROR after {retries} attempts")
+            print(f"  → ERROR after 3 attempts")
 
-        time.sleep(3)  # wait 3 seconds between claims
+        time.sleep(3)
 
     return results
 

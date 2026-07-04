@@ -87,7 +87,19 @@ def verify_claim(request: ClaimRequest):
     papers = get_similar_papers(primary_claim)
 
     if not papers:
-        raise HTTPException(status_code=404, detail="No relevant papers found")
+        return {
+            "verdict": "INSUFFICIENT EVIDENCE",
+            "confidence": 0.0,
+            "explanation": "No relevant peer-reviewed studies found for this claim.",
+            "citations": [],
+            "papers": [],
+            "judge": {},
+            "decomposition": decomposition,
+            "plain_english": "We couldn't find any relevant medical studies to evaluate this claim.",
+            "takeaway": "Consult a medical professional for guidance.",
+            "evidence_strength": "Insufficient",
+            "cached": False
+        }
 
     with ThreadPoolExecutor(max_workers=2) as executor:
         verdict_future = executor.submit(get_verdict, primary_claim, papers)
