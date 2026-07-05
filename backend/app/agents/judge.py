@@ -5,8 +5,6 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from groq_client import call_groq
 
-load_dotenv(override=True)
-
 
 def extract_json(raw: str) -> dict:
     if not raw:

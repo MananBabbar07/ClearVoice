@@ -5,8 +5,6 @@ from dotenv import load_dotenv
 from groq_client import call_groq
 
 
-load_dotenv(override=True)
-
 
 def extract_json(raw: str) -> dict:
     if not raw:
