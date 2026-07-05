@@ -1,8 +1,9 @@
 import os
 import json
-from dotenv import load_dotenv
 import sys
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from groq_client import call_groq
 
 
@@ -58,6 +59,8 @@ For each paper respond in this exact JSON format:
 Respond with JSON only. No extra text, no markdown formatting, no backticks."""
 
     raw = call_groq(prompt)
+    print(f"Judge raw response: {raw[:300] if raw else 'None'}")
+
     result = extract_json(raw)
     if result is not None:
         return result
@@ -70,7 +73,6 @@ Respond with JSON only. No extra text, no markdown formatting, no backticks."""
 
 
 if __name__ == "__main__":
-    import sys
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     from retrieval import get_similar_papers
     claim = input("Enter a health claim: ")
