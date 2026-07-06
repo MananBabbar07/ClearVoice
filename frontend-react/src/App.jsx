@@ -3,7 +3,7 @@ import axios from "axios"
 import { Microscope, Mic, Loader2, CheckCircle, XCircle, AlertTriangle, Info, ChevronDown, ChevronUp, ExternalLink } from "lucide-react"
 
 const API_URL = "https://manan77709-clearvoice-api.hf.space"
-
+// const API_URL = "http://localhost:8000"
 export default function App() {
   const [claim, setClaim] = useState("")
   const [loading, setLoading] = useState(false)
@@ -20,6 +20,9 @@ export default function App() {
     try {
       const response = await axios.post(`${API_URL}/verify`, { claim }, { timeout: 90000 })
       setResult(response.data)
+      console.log("Judge data:", response.data.judge)
+      console.log("Judge papers:", response.data.judge?.papers)
+      console.log("Papers length:", response.data.judge?.papers?.length)
     } catch (err) {
       setError("Failed to connect to API. Please try again.")
     } finally {
