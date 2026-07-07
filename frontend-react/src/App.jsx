@@ -20,9 +20,7 @@ export default function App() {
     try {
       const response = await axios.post(`${API_URL}/verify`, { claim }, { timeout: 90000 })
       setResult(response.data)
-      console.log("Judge data:", response.data.judge)
-      console.log("Judge papers:", response.data.judge?.papers)
-      console.log("Papers length:", response.data.judge?.papers?.length)
+      
     } catch (err) {
       setError("Failed to connect to API. Please try again.")
     } finally {
@@ -187,7 +185,7 @@ export default function App() {
             </details>
 
             {/* Evidence Quality */}
-            {result.judge?.papers?.length > 0 && (
+            {result.judge && result.judge.overall_quality !== "UNKNOWN" && (
               <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide">📊 Evidence Quality</h3>
