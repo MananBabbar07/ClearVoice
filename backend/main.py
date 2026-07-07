@@ -103,7 +103,7 @@ def verify_claim(request: ClaimRequest):
 
     with ThreadPoolExecutor(max_workers=2) as executor:
         verdict_future = executor.submit(get_verdict, primary_claim, papers)
-        judge_future = executor.submit(judge_papers, primary_claim, papers)
+        judge_future = executor.submit(judge_papers, primary_claim, papers[:3])
 
         verdict = verdict_future.result()
         judge_result = judge_future.result()

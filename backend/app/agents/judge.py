@@ -31,7 +31,7 @@ def judge_papers(claim: str, papers: list) -> dict:
 Paper {i}:
 Title: {paper['title']}
 Journal: {paper['journal']} ({paper['year']})
-Abstract: {paper['abstract'][:400]}
+Abstract: {paper['abstract'][:200]}
 """
 
     prompt = f"""You are a medical research quality assessor. Analyze each study and classify it.
