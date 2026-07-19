@@ -110,7 +110,7 @@ export default function ResultsPanel({ result, expandedPapers, onTogglePaper }) 
         )}
       </details>
 
-      {result.judge && result.judge.overall_quality !== "UNKNOWN" && (
+      {result.judge && result.judge.overall_quality && result.judge.overall_quality !== "UNKNOWN" && (
         <div className="results-card">
           <div className="results-card__row">
             <div className="results-block__heading">Evidence quality</div>
