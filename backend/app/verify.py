@@ -67,7 +67,7 @@ Respond with JSON only. No extra text, no markdown formatting, no backticks."""
 
 def get_verdict(claim: str, papers: list) -> dict:
     prompt = build_prompt(claim, papers)
-    raw = call_groq(prompt)
+    raw = call_groq(prompt, response_format={"type": "json_object"})
 
     result = extract_json(raw)
     if result is not None:

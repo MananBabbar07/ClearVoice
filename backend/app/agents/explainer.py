@@ -51,7 +51,7 @@ Respond in this exact JSON format:
 
 Respond with JSON only. No extra text, no markdown formatting, no backticks."""
 
-    raw = call_groq(prompt)
+    raw = call_groq(prompt, response_format={"type": "json_object"})
     result = extract_json(raw)
     if result is not None:
         return result
