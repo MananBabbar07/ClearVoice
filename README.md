@@ -1,6 +1,13 @@
+---
+title: ClearVoice API
+emoji: 🔬
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
+
 # 🔬 ClearVoice — AI-Powered Medical Misinformation Checker
-
-
 
 <p align="center">
 
