@@ -27,7 +27,24 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-cache = redis.Redis.from_url(os.getenv("REDIS_URL"), decode_responses=True)
+def init_redis_cache():
+    redis_url = os.getenv("REDIS_URL")
+    if not redis_url:
+        print("[Redis] REDIS_URL not set, running without cache.")
+        return None
+    try:
+        return redis.Redis.from_url(
+            redis_url,
+            decode_responses=True,
+            socket_connect_timeout=3,
+            socket_timeout=3,
+        )
+    except Exception as e:
+        print(f"[Redis] Failed to initialize client, running without cache: {e}")
+        return None
+
+
+cache = init_redis_cache()
 
 CACHE_TTL = 60 * 60 * 24
 
@@ -37,13 +54,18 @@ class ClaimRequest(BaseModel):
 
 
 def determine_final_verdict(verdict: dict, judge_result: dict) -> dict:
-    papers = judge_result.get("papers", [])
-    supports = sum(1 for p in papers if p.get("stance") == "SUPPORTS")
-    contradicts = sum(1 for p in papers if p.get("stance") == "CONTRADICTS")
+    papers = judge_result.get("papers") or []
+    supports = sum(1 for p in papers if isinstance(p, dict) and p.get("stance") == "SUPPORTS")
+    contradicts = sum(1 for p in papers if isinstance(p, dict) and p.get("stance") == "CONTRADICTS")
 
     if supports > 0 and contradicts > 0:
         verdict["verdict"] = "MISLEADING"
-        verdict["confidence"] = min(verdict.get("confidence", 0.5), 0.7)
+        raw_conf = verdict.get("confidence", 0.5)
+        try:
+            conf_val = float(raw_conf) if raw_conf is not None else 0.5
+        except (TypeError, ValueError):
+            conf_val = 0.5
+        verdict["confidence"] = min(conf_val, 0.7)
         verdict["explanation"] = verdict.get("explanation", "") + f" Note: Evidence is mixed — {supports} paper(s) support and {contradicts} paper(s) contradict this claim."
 
     return verdict
@@ -56,6 +78,8 @@ def root():
 
 @app.get("/health")
 def health():
+    if cache is None:
+        return {"status": "ok", "redis": "unavailable"}
     try:
         cache.ping()
         redis_status = "ok"
@@ -71,18 +95,23 @@ def verify_claim(request: ClaimRequest):
     if not claim:
         raise HTTPException(status_code=400, detail="Claim cannot be empty")
 
-    cached = cache.get(claim)
-    if cached:
-        result = json.loads(cached)
-        result["cached"] = True
-        return result
+    if cache is not None:
+        try:
+            cached = cache.get(claim)
+            if cached:
+                result = json.loads(cached)
+                result["cached"] = True
+                return result
+        except Exception as e:
+            print(f"[Redis] Cache read failed, skipping cache: {e}")
 
     if " and " in claim.lower() or " or " in claim.lower():
         decomposition = decompose_claim(claim)
     else:
         decomposition = {"is_complex": False, "sub_claims": [claim], "original_claim": claim}
 
-    primary_claim = decomposition["sub_claims"][0]
+    sub_claims = decomposition.get("sub_claims") or [claim]
+    primary_claim = sub_claims[0]
 
     papers = get_similar_papers(primary_claim)
 
@@ -110,10 +139,15 @@ def verify_claim(request: ClaimRequest):
 
     verdict = determine_final_verdict(verdict, judge_result)
 
+    try:
+        conf_for_explainer = float(verdict.get("confidence") or 0)
+    except (TypeError, ValueError):
+        conf_for_explainer = 0.0
+
     explanation_result = explain_verdict(
         claim=claim,
         verdict=verdict.get("verdict", ""),
-        confidence=verdict.get("confidence", 0),
+        confidence=conf_for_explainer,
         explanation=verdict.get("explanation", ""),
         judge_result=judge_result
     )
@@ -135,6 +169,10 @@ def verify_claim(request: ClaimRequest):
     verdict["evidence_strength"] = explanation_result.get("evidence_strength", "")
     verdict["cached"] = False
 
-    cache.setex(claim, CACHE_TTL, json.dumps(verdict))
+    if cache is not None:
+        try:
+            cache.setex(claim, CACHE_TTL, json.dumps(verdict))
+        except Exception as e:
+            print(f"[Redis] Cache write failed, skipping cache: {e}")
 
     return verdict
