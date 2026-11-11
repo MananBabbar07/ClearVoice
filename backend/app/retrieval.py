@@ -1,5 +1,7 @@
 import os
 import time
+import threading
+import logging
 from dotenv import load_dotenv
 from Bio import Entrez
 from sentence_transformers import SentenceTransformer
@@ -7,25 +9,84 @@ import numpy as np
 
 load_dotenv()
 
+logger = logging.getLogger(__name__)
+
 Entrez.email = os.getenv("NCBI_EMAIL", "your@email.com")
+ncbi_api_key = os.getenv("NCBI_API_KEY")
+if ncbi_api_key:
+    Entrez.api_key = ncbi_api_key
 
 model = SentenceTransformer("NeuML/pubmedbert-base-embeddings")
+
+_entrez_lock = threading.Lock()
+_embed_lock = threading.Lock()
+_last_entrez_call = 0.0
+_entrez_min_interval = 0.11 if ncbi_api_key else 0.35
+
+TARGET_STUDY_TYPES = [
+    "Meta-Analysis",
+    "Systematic Review",
+    "Randomized Controlled Trial",
+    "Clinical Trial",
+    "Review",
+    "Case Reports",
+    "Observational Study",
+]
+
+
+def map_study_type(publication_types: list) -> str:
+    if not publication_types:
+        return "Other"
+    lowered = [pt.strip().lower() for pt in publication_types if pt]
+    for target in TARGET_STUDY_TYPES:
+        if target.lower() in lowered:
+            return target
+    for pt_low in lowered:
+        if "clinical trial" in pt_low:
+            return "Clinical Trial"
+        if "observational study" in pt_low:
+            return "Observational Study"
+        if "case report" in pt_low:
+            return "Case Reports"
+    return "Other"
+
+
+def _entrez_call(func, *args, retries: int = 2, **kwargs):
+    global _last_entrez_call
+    for attempt in range(retries + 1):
+        with _entrez_lock:
+            elapsed = time.monotonic() - _last_entrez_call
+            if elapsed < _entrez_min_interval:
+                time.sleep(_entrez_min_interval - elapsed)
+            _last_entrez_call = time.monotonic()
+        try:
+            handle = func(*args, **kwargs)
+            record = Entrez.read(handle)
+            handle.close()
+            return record
+        except Exception as e:
+            if attempt < retries:
+                logger.warning("Entrez call failed (attempt %d/%d): %s", attempt + 1, retries + 1, e)
+                time.sleep(0.5 * (attempt + 1))
+            else:
+                raise
 
 
 def cosine_similarity(a, b):
     a = np.array(a)
     b = np.array(b)
-    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+    denom = np.linalg.norm(a) * np.linalg.norm(b)
+    if denom == 0:
+        return 0.0
+    return float(np.dot(a, b) / denom)
 
 
 def search_pubmed_live(query: str, max_results: int = 20) -> list:
     try:
-        handle = Entrez.esearch(db="pubmed", term=query, retmax=max_results, sort="relevance")
-        record = Entrez.read(handle)
-        handle.close()
+        record = _entrez_call(Entrez.esearch, db="pubmed", term=query, retmax=max_results, sort="relevance")
         return record["IdList"]
     except Exception as e:
-        print(f"PubMed search error: {e}")
+        logger.warning("PubMed search error: %s", e)
         return []
 
 
@@ -34,9 +95,7 @@ def fetch_abstracts_live(pmids: list) -> list:
         return []
     try:
         ids = ",".join(pmids)
-        handle = Entrez.efetch(db="pubmed", id=ids, rettype="xml", retmode="xml")
-        records = Entrez.read(handle)
-        handle.close()
+        records = _entrez_call(Entrez.efetch, db="pubmed", id=ids, rettype="xml", retmode="xml")
 
         papers = []
         for article in records["PubmedArticle"]:
@@ -55,6 +114,7 @@ def fetch_abstracts_live(pmids: list) -> list:
                     name = f"{a.get('LastName', '')} {a.get('ForeName', '')}".strip()
                     if name:
                         authors.append(name)
+                publication_types = [str(pt) for pt in art.get("PublicationTypeList", [])]
 
                 if abstract and len(abstract) > 100:
                     papers.append({
@@ -64,35 +124,40 @@ def fetch_abstracts_live(pmids: list) -> list:
                         "journal": journal,
                         "year": year,
                         "authors": authors,
+                        "publication_types": publication_types,
+                        "study_type": map_study_type(publication_types),
                     })
             except Exception:
                 continue
 
         return papers
     except Exception as e:
-        print(f"PubMed fetch error: {e}")
+        logger.warning("PubMed fetch error: %s", e)
         return []
 
 
 def get_similar_papers(claim: str, top_k: int = 5) -> list:
-    # Embed the claim
-    claim_embedding = model.encode(claim).tolist()
+    try:
+        sim_threshold = float(os.getenv("SIM_THRESHOLD", "0.30"))
+    except ValueError:
+        sim_threshold = 0.30
 
-    # Search PubMed live
+    with _embed_lock:
+        claim_embedding = model.encode(claim).tolist()
+
     pmids = search_pubmed_live(claim, max_results=20)
 
     if not pmids:
         return []
 
-  
     papers = fetch_abstracts_live(pmids)
 
     if not papers:
         return []
 
-    
     abstracts = [p["abstract"] for p in papers]
-    embeddings = model.encode(abstracts, batch_size=16).tolist()
+    with _embed_lock:
+        embeddings = model.encode(abstracts, batch_size=16).tolist()
 
     scored = []
     for paper, embedding in zip(papers, embeddings):
@@ -100,9 +165,18 @@ def get_similar_papers(claim: str, top_k: int = 5) -> list:
         paper["similarity"] = round(float(similarity), 2)
         scored.append(paper)
 
-    #
     scored.sort(key=lambda x: x["similarity"], reverse=True)
-    return scored[:top_k]
+    filtered = [p for p in scored if p["similarity"] >= sim_threshold]
+    top_sim = scored[0]["similarity"] if scored else 0.0
+    logger.info(
+        "[Retrieval] claim=%r top_similarity=%.2f kept=%d/%d threshold=%.2f",
+        claim,
+        top_sim,
+        len(filtered),
+        len(scored),
+        sim_threshold,
+    )
+    return filtered[:top_k]
 
 
 if __name__ == "__main__":
