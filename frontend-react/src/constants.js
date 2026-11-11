@@ -1,5 +1,4 @@
-export const API_URL = "https://manan77709-clearvoice-api.hf.space"
-// export const API_URL = "http://localhost:8000"
+export const API_URL = import.meta.env.VITE_API_URL || "https://manan77709-clearvoice-api.hf.space"
 
 export const LINKS = {
   github: "https://github.com/MananBabbar07/ClearVoice",
