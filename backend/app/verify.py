@@ -3,6 +3,7 @@ import os
 import json
 from dotenv import load_dotenv
 from groq_client import call_groq
+from utils import smart_slice
 
 
 
@@ -31,7 +32,7 @@ Paper {i}:
 PMID: {paper['pmid']}
 Title: {paper['title']}
 Journal: {paper['journal']} ({paper['year']})
-Abstract: {paper['abstract'][:500]}
+Abstract: {smart_slice(paper.get('abstract', ''), 250, 450)}
 Similarity: {paper['similarity']:.2f}
 """
 
@@ -67,17 +68,19 @@ Respond with JSON only. No extra text, no markdown formatting, no backticks."""
 
 def get_verdict(claim: str, papers: list) -> dict:
     prompt = build_prompt(claim, papers)
-    raw = call_groq(prompt, response_format={"type": "json_object"})
+    raw, model_used = call_groq(prompt, response_format={"type": "json_object"})
 
     result = extract_json(raw)
     if result is not None:
+        result["model_used"] = model_used
         return result
 
     return {
         "verdict": "ERROR",
         "confidence": 0.0,
         "explanation": "Failed to parse LLM response.",
-        "citations": []
+        "citations": [],
+        "model_used": model_used
     }
 
 
