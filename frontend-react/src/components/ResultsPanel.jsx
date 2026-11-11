@@ -23,6 +23,14 @@ function StanceDot({ stance }) {
 export default function ResultsPanel({ result, expandedPapers, onTogglePaper }) {
   if (!result) return null
 
+  const papersByPmid = new Map(
+    (result.papers || []).map((p) => [String(p.pmid), p])
+  )
+
+  const hasSubResults =
+    Array.isArray(result.sub_results) &&
+    (result.sub_results.length > 1 || (result.sub_results.length === 1 && result.decomposition?.is_complex))
+
   return (
     <div className="results">
       <div className="results-card">
@@ -30,7 +38,7 @@ export default function ResultsPanel({ result, expandedPapers, onTogglePaper }) 
           <VerdictBadge verdict={result.verdict} />
           <div className="results-stats">
             <div className="results-stat">
-              <span className="results-stat__value">{Math.round(result.confidence * 100)}%</span>
+              <span className="results-stat__value">{Math.round((result.confidence ?? 0) * 100)}%</span>
               <span className="results-stat__label">Confidence</span>
             </div>
             <div className="results-stat">
@@ -47,18 +55,39 @@ export default function ResultsPanel({ result, expandedPapers, onTogglePaper }) 
           </p>
         )}
 
-        {result.decomposition?.is_complex && (
+        {hasSubResults ? (
           <div className="results-block results-block--accent">
             <div className="results-block__heading">
               <Layers size={15} />
-              Complex claim — {result.decomposition.sub_claims.length} sub-claims analyzed
+              Complex claim — {result.sub_results.length} sub-claims analyzed
             </div>
-            <ul className="results-list">
-              {result.decomposition.sub_claims.map((sc, i) => (
-                <li key={i}>{sc}</li>
+            <div className="sub-results">
+              {result.sub_results.map((sr, i) => (
+                <div key={i} className="sub-result-item">
+                  <span className="sub-result-item__claim">{sr.sub_claim}</span>
+                  <div className="sub-result-item__meta">
+                    <VerdictBadge verdict={sr.verdict} />
+                    <span>{Math.round((sr.confidence ?? 0) * 100)}%</span>
+                    <span>{sr.papers?.length ?? 0} studies</span>
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
+        ) : (
+          result.decomposition?.is_complex && Array.isArray(result.decomposition.sub_claims) && (
+            <div className="results-block results-block--accent">
+              <div className="results-block__heading">
+                <Layers size={15} />
+                Complex claim — {result.decomposition.sub_claims.length} sub-claims analyzed
+              </div>
+              <ul className="results-list">
+                {result.decomposition.sub_claims.map((sc, i) => (
+                  <li key={i}>{sc}</li>
+                ))}
+              </ul>
+            </div>
+          )
         )}
 
         {result.plain_english && (
@@ -123,32 +152,35 @@ export default function ResultsPanel({ result, expandedPapers, onTogglePaper }) 
           </p>
 
           <div className="papers-list">
-            {result.judge.papers.map((jp, i) => {
-              const paper = result.papers?.[i]
+            {(result.judge.papers || []).map((jp, i) => {
+              const paper = jp.pmid != null ? papersByPmid.get(String(jp.pmid)) : undefined
+              const key = jp.pmid != null ? String(jp.pmid) : i
               return (
-                <div key={i} className="paper-item">
+                <div key={key} className="paper-item">
                   <button
                     type="button"
                     className="paper-item__toggle"
-                    onClick={() => onTogglePaper(i)}
+                    onClick={() => onTogglePaper(key)}
                   >
                     <div className="paper-item__title">
                       <StanceDot stance={jp.stance} />
-                      <span>{paper?.title} ({paper?.year})</span>
+                      <span>
+                        {paper ? `${paper.title} (${paper.year})` : (jp.one_line_summary || `Study #${jp.paper_number || i + 1}`)}
+                      </span>
                     </div>
-                    {expandedPapers[i] ? (
+                    {expandedPapers[key] ? (
                       <ChevronUp size={16} className="paper-item__chevron" />
                     ) : (
                       <ChevronDown size={16} className="paper-item__chevron" />
                     )}
                   </button>
 
-                  {expandedPapers[i] && paper && (
+                  {expandedPapers[key] && (
                     <div className="paper-item__body">
                       <div className="paper-metrics">
                         <div className="paper-metric">
                           <span>Study type</span>
-                          <strong>{jp.study_type}</strong>
+                          <strong>{jp.study_type || paper?.study_type || "Other"}</strong>
                         </div>
                         <div className="paper-metric">
                           <span>Quality</span>
@@ -156,20 +188,24 @@ export default function ResultsPanel({ result, expandedPapers, onTogglePaper }) 
                         </div>
                         <div className="paper-metric">
                           <span>Similarity</span>
-                          <strong>{paper.similarity}</strong>
+                          <strong>{paper ? paper.similarity : "—"}</strong>
                         </div>
                       </div>
                       <p className="paper-item__summary">{jp.one_line_summary}</p>
-                      <p className="paper-item__journal">{paper.journal}</p>
-                      <a
-                        href={`https://pubmed.ncbi.nlm.nih.gov/${paper.pmid}/`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="citation-link citation-link--sm"
-                      >
-                        View on PubMed
-                        <ExternalLink size={10} />
-                      </a>
+                      {paper && (
+                        <>
+                          <p className="paper-item__journal">{paper.journal}</p>
+                          <a
+                            href={`https://pubmed.ncbi.nlm.nih.gov/${paper.pmid}/`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="citation-link citation-link--sm"
+                          >
+                            View on PubMed
+                            <ExternalLink size={10} />
+                          </a>
+                        </>
+                      )}
                     </div>
                   )}
                 </div>
