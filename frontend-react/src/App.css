@@ -272,6 +272,40 @@
 
 }
 
+.site-logo__mark--sm{
+
+  width:34px;
+
+  height:34px;
+
+  border-radius:10px;
+
+  font-size:13px;
+
+}
+
+.site-menu-toggle{
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  width:40px;
+
+  height:40px;
+
+  border-radius:12px;
+
+  border:1px solid var(--border);
+
+  background:var(--social-bg);
+
+  color:var(--text);
+
+}
+
 /* =======================================================
    Hero
 ======================================================= */
@@ -449,6 +483,48 @@
   padding-top:22px;
 
   border-top:1px solid var(--border);
+
+}
+
+.verify-card__hint{
+
+  font-size:13px;
+
+  color:var(--text-faint);
+
+}
+
+.verify-card__buttons{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+
+}
+
+.spin{
+
+  animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+  from{
+
+    transform:rotate(0deg);
+
+  }
+
+  to{
+
+    transform:rotate(360deg);
+
+  }
 
 }
 /* =======================================================
@@ -759,6 +835,124 @@
 
 }
 
+.sub-results{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    margin-top:12px;
+
+}
+
+.sub-result-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:14px;
+
+    flex-wrap:wrap;
+
+    padding:14px 16px;
+
+    border-radius:14px;
+
+    background:rgba(16,18,20,.55);
+
+    border:1px solid var(--border);
+
+}
+
+.sub-result-item__claim{
+
+    flex:1 1 260px;
+
+    color:var(--text);
+
+    font-size:14px;
+
+    line-height:1.5;
+
+}
+
+.sub-result-item__meta{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    font-size:12px;
+
+    color:var(--text-muted);
+
+}
+
+.sub-result-item__meta .verdict-badge{
+
+    padding:5px 12px;
+
+    font-size:12px;
+
+    gap:6px;
+
+}
+
+.results-details{
+
+    cursor:default;
+
+}
+
+.results-details__summary{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:12px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.1em;
+
+    font-weight:700;
+
+    color:var(--text-muted);
+
+    cursor:pointer;
+
+    list-style:none;
+
+    user-select:none;
+
+}
+
+.results-details__summary::-webkit-details-marker{
+
+    display:none;
+
+}
+
+.results-details[open] .results-details__summary{
+
+    margin-bottom:16px;
+
+    color:white;
+
+}
+
 /* =======================================================
    Takeaway
 ======================================================= */
@@ -846,6 +1040,20 @@
     color:white;
 
     text-decoration:underline;
+
+}
+
+.citation-link--sm{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    margin-top:12px;
+
+    font-size:13px;
 
 }
 
@@ -968,6 +1176,70 @@
     border:none;
 
     color:inherit;
+
+}
+
+.paper-item__title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    text-align:left;
+
+    font-size:15px;
+
+    font-weight:500;
+
+    color:var(--text);
+
+    line-height:1.5;
+
+}
+
+.paper-item__chevron{
+
+    flex-shrink:0;
+
+    color:var(--text-muted);
+
+    margin-left:12px;
+
+}
+
+.stance-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    flex-shrink:0;
+
+}
+
+.stance-dot--supports{
+
+    background:var(--success);
+
+    box-shadow:0 0 8px rgba(72,166,107,.5);
+
+}
+
+.stance-dot--contradicts{
+
+    background:var(--danger);
+
+    box-shadow:0 0 8px rgba(207,102,102,.5);
+
+}
+
+.stance-dot--neutral{
+
+    background:var(--neutral);
 
 }
 
@@ -1287,6 +1559,26 @@
 
 }
 
+.founder-card__body{
+
+    flex:1;
+
+}
+
+.founder-card__top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:16px;
+
+    flex-wrap:wrap;
+
+}
+
 .founder-card h3{
 
     margin:0;
@@ -1561,6 +1853,46 @@
 ======================================================= */
 
 @media(max-width:768px){
+
+.site-menu-toggle{
+
+    display:inline-flex;
+
+}
+
+.site-nav{
+
+    display:none;
+
+    position:fixed;
+
+    top:var(--header-h);
+
+    left:0;
+
+    right:0;
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+    gap:8px;
+
+    padding:16px 20px 20px;
+
+    background:rgba(16,18,20,.96);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.site-nav--open{
+
+    display:flex;
+
+}
 
 .results-card,
 .verify-card,
