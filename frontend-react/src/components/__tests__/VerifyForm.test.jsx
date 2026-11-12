@@ -54,3 +54,4 @@ describe("VerifyForm", () => {
     expect(screen.getByLabelText(/health claim/i)).toHaveValue(firstSample)
   })
 })
+

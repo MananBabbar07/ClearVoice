@@ -130,3 +130,4 @@ describe("ResultsPanel", () => {
     expect(screen.getByText("4/5")).toBeInTheDocument()
   })
 })
+
