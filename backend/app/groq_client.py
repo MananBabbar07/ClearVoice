@@ -11,11 +11,14 @@ MODELS = [
     "openai/gpt-oss-120b",
     "openai/gpt-oss-20b",
 ]
+_unavailable = set()
 
 
 def call_groq(prompt: str, retries: int = 2, response_format: dict = None, models: list = None, validator=None):
     model_list = models if models is not None else MODELS
     for model in model_list:
+        if model in _unavailable:
+            continue
         for attempt in range(retries):
             try:
                 kwargs = {
@@ -44,6 +47,7 @@ def call_groq(prompt: str, retries: int = 2, response_format: dict = None, model
                     break
                 elif "404" in error_str or "model_not_found" in error_str.lower():
                     logger.warning("[ModelNotFound] %s unavailable: %s", model, e)
+                    _unavailable.add(model)
                     break
                 else:
                     logger.warning("[Error] %s attempt %d failed: %s", model, attempt + 1, e)
