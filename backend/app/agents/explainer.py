@@ -1,7 +1,7 @@
-import os
 import json
-from dotenv import load_dotenv
+import os
 import sys
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from groq_client import call_groq
 
@@ -27,7 +27,10 @@ def explain_verdict(claim: str, verdict: str, confidence: float, explanation: st
     overall_quality = judge_result.get("overall_quality", "UNKNOWN")
     quality_explanation = judge_result.get("quality_explanation", "")
 
-    prompt = f"""You are a medical communicator who explains complex medical verdicts in plain English for everyday people.
+    prompt = (
+        "You are a medical communicator who explains complex medical verdicts in plain English "
+        "for everyday people."
+        f"""
 
 CLAIM: "{claim}"
 VERDICT: {verdict}
@@ -50,6 +53,7 @@ Respond in this exact JSON format:
 }}
 
 Respond with JSON only. No extra text, no markdown formatting, no backticks."""
+    )
 
     raw, model_used = call_groq(prompt, response_format={"type": "json_object"})
     result = extract_json(raw)

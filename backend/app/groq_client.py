@@ -1,6 +1,7 @@
+import logging
 import os
 import time
-import logging
+
 from groq import Groq
 
 logger = logging.getLogger(__name__)

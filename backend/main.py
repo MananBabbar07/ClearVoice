@@ -1,25 +1,26 @@
-import sys
+import json
+import logging
 import os
 import re
-import json
 import string
-import logging
+import sys
 from concurrent.futures import ThreadPoolExecutor
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "app"))
 
+import redis
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from dotenv import load_dotenv
-import redis
 
 load_dotenv(override=True)
 
-from retrieval import get_similar_papers
-from verify import get_verdict
-from agents.judge import judge_papers
 from agents.decomposer import decompose_claim
 from agents.explainer import explain_verdict
+from agents.judge import judge_papers
+from retrieval import get_similar_papers
+from verify import get_verdict
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -104,7 +105,11 @@ def determine_final_verdict(verdict: dict, judge_result: dict) -> dict:
         verdict["verdict"] = "MISLEADING"
         conf_val = safe_float(verdict.get("confidence"), 0.5)
         verdict["confidence"] = min(conf_val, 0.7)
-        verdict["explanation"] = verdict.get("explanation", "") + f" Note: Evidence is mixed — {supports} paper(s) support and {contradicts} paper(s) contradict this claim."
+        verdict["explanation"] = (
+            verdict.get("explanation", "")
+            + f" Note: Evidence is mixed — {supports} paper(s) support and "
+            + f"{contradicts} paper(s) contradict this claim."
+        )
 
     return verdict
 
@@ -310,7 +315,12 @@ def verify_claim(request: ClaimRequest):
         },
     }
 
-    if cache is not None and all(papers_by_idx) and overall_verdict != "ERROR" and not any(sr["verdict"] == "ERROR" for sr in sub_results):
+    if (
+        cache is not None
+        and all(papers_by_idx)
+        and overall_verdict != "ERROR"
+        and not any(sr["verdict"] == "ERROR" for sr in sub_results)
+    ):
         try:
             cache.setex(cache_key, CACHE_TTL, json.dumps(response_payload))
         except Exception as e:

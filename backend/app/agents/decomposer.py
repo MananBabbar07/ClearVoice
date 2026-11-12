@@ -1,10 +1,9 @@
-import os
 import json
-from dotenv import load_dotenv
+import os
 import sys
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from groq_client import call_groq
-
 
 
 def extract_json(raw: str) -> dict:
@@ -25,7 +24,10 @@ def extract_json(raw: str) -> dict:
 
 
 def decompose_claim(claim: str) -> dict:
-    prompt = f"""You are a medical claim analyzer. Break down the following health claim into simple sub-claims if it contains multiple assertions.
+    prompt = (
+        "You are a medical claim analyzer. Break down the following health claim into simple sub-claims "
+        "if it contains multiple assertions."
+        f"""
 
 CLAIM: "{claim}"
 
@@ -42,6 +44,7 @@ Rules:
 - Maximum 4 sub-claims
 
 Respond with JSON only. No extra text, no markdown formatting, no backticks."""
+    )
 
     raw, model_used = call_groq(prompt, response_format={"type": "json_object"})
     result = extract_json(raw)
