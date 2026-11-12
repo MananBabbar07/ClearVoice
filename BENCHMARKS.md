@@ -59,3 +59,21 @@
 | Frontend | Streamlit | React + Vercel |
 | Voice input | No | Whisper API |
 | Browser extension | No | Chrome/Edge |
+
+## Cold vs Warm Latency Protocol
+
+> [!IMPORTANT]
+> **Flush the Redis cache before every cold-latency benchmark run** (e.g., `redis-cli -u "$REDIS_URL" FLUSHDB` or `python clear_cache.py`). Otherwise cached `v2:` keys will return warm cache hits and underreport cold retrieval + LLM latency.
+
+To measure warm latency, run `python benchmark.py` a second time immediately after a cold run without flushing Redis.
+
+### Cold vs Warm
+
+| Metric | Cold Run (Cache Flushed) | Warm Run (Cache Hit) |
+|--------|--------------------------|----------------------|
+| Total Claims | 50 | 50 |
+| Overall Accuracy | TBD | TBD |
+| Avg Latency (s) | TBD | TBD |
+| p50 Latency (s) | TBD | TBD |
+| p95 Latency (s) | TBD | TBD |
+| Errors | TBD | TBD |

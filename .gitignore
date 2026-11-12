@@ -13,3 +13,4 @@ logs/
 node_modules/
 node_modules 
 .env.
+benchmark_results.json
