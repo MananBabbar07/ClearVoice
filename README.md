@@ -25,6 +25,18 @@ pinned: false
 
 </p>
 
+<p align="center">
+
+  <a href="https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml">
+    <img src="https://github.com/<OWNER>/<REPO>/actions/workflows/ci.yml/badge.svg" alt="CI" />
+  </a>
+
+  <a href="https://codecov.io/gh/<OWNER>/<REPO>">
+    <img src="https://codecov.io/gh/<OWNER>/<REPO>/branch/main/graph/badge.svg" alt="Coverage" />
+  </a>
+
+</p>
+
 
 
 ---
