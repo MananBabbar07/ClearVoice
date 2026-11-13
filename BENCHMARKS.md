@@ -77,3 +77,70 @@ To measure warm latency, run `python benchmark.py` a second time immediately aft
 | p50 Latency (s) | TBD | TBD |
 | p95 Latency (s) | TBD | TBD |
 | Errors | TBD | TBD |
+
+## PUBHEALTH Benchmark Evaluation
+
+### Overview & Citation
+PUBHEALTH is a comprehensive dataset for explainable automated fact-checking of public health claims:
+
+> Kotonya, N., & Toni, F. (2020). *Explainable Automated Fact-Checking for Public Health Claims*. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 7740–7754.
+
+The dataset contains claims verified by journalistic fact-checking organizations with veracity labels and explanatory reviews.
+
+### Label Mapping
+PUBHEALTH test split labels map to ClearVoice verdicts as follows:
+
+| PUBHEALTH Original Label | ClearVoice Expected Verdict | Category |
+|--------------------------|-----------------------------|----------|
+| `true` | `TRUE` | `true` |
+| `false` | `FALSE` | `false` |
+| `mixture` | `MISLEADING` | `misleading` |
+| `unproven` | `INSUFFICIENT EVIDENCE` | `insufficient` |
+
+Rows with label `-1` (unlabelled / invalid) are discarded.
+
+### Filtering Rules & Sampling Protocol
+- **Claim length**: Strictly under 200 characters (`< 200`).
+- **Non-empty**: Empty or whitespace-only claims dropped.
+- **Normalization**: Leading and trailing whitespace trimmed.
+- **De-duplication**: Exact case-insensitive duplicate claims dropped.
+- **Label filtering**: Rows with label `-1` dropped.
+- **Stratified sampling**: 14 claims sampled per class using fixed random seed `42` (`random.Random(42)`), yielding 56 total benchmark claims written to `benchmark_pubhealth.json`.
+
+### Caveats
+1. **Fact-checker ground truth vs. PubMed consensus**: PUBHEALTH labels originate from journalistic fact-checkers (e.g. Snopes, FactCheck.org, PolitiFact) evaluating media claims and public statements, rather than systematic biomedical literature reviews.
+2. **"Unproven" vs. "Insufficient Evidence"**: Journalistic "unproven" often means a specific claim lacks official confirmation or proof at the time of fact-checking, which does not always strictly correlate with zero scientific studies existing on PubMed.
+3. **Dynamic retrieval**: ClearVoice queries PubMed live in real time; results reflect the state of PubMed indexed literature on the date of execution.
+
+### Results
+
+#### Overall Performance
+
+| Metric | Value |
+|--------|-------|
+| Benchmark File | `benchmark_pubhealth.json` |
+| Total Claims | 56 |
+| Correct | TBD |
+| Errors | TBD |
+| Overall Accuracy | TBD |
+| Cold Latency (Avg) | TBD |
+| Cold Latency (p50) | TBD |
+| Cold Latency (p95) | TBD |
+
+#### Per-Class Accuracy
+
+| Class | Total | Correct | Accuracy |
+|-------|-------|---------|----------|
+| `true` | 14 | TBD | TBD |
+| `false` | 14 | TBD | TBD |
+| `misleading` | 14 | TBD | TBD |
+| `insufficient` | 14 | TBD | TBD |
+
+#### Confusion Matrix
+
+| Expected \ Predicted | TRUE | FALSE | MISLEADING | INSUFFICIENT EVIDENCE | ERROR |
+|----------------------|------|-------|------------|-----------------------|-------|
+| **TRUE** | TBD | TBD | TBD | TBD | TBD |
+| **FALSE** | TBD | TBD | TBD | TBD | TBD |
+| **MISLEADING** | TBD | TBD | TBD | TBD | TBD |
+| **INSUFFICIENT EVIDENCE** | TBD | TBD | TBD | TBD | TBD |
