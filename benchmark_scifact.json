@@ -1,0 +1,482 @@
+[
+  {
+    "claim": "A high microerythrocyte count raises vulnerability to severe anemia in homozygous alpha (+)- thalassemia trait subjects.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 42,
+    "id": 1
+  },
+  {
+    "claim": "Combination nicotine replacement therapies with varenicline or bupropion lead to significantly higher long-term abstinence rates at 52 weeks than varenicline monotherapy.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 274,
+    "id": 2
+  },
+  {
+    "claim": "Pretreatment with the Arp2/3 inhibitor CK-666 affects lamelliopodia formation.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 967,
+    "id": 3
+  },
+  {
+    "claim": "Up-regulation of the p53 pathway and related molecular events casues cancer resistance and results in a significantly shortened lifespan marked by senescent cells and accelerated organismal aging.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 1344,
+    "id": 4
+  },
+  {
+    "claim": "Less than 10% of the gabonese children with Schimmelpenning-Feuerstein-Mims syndrome (SFM) had a plasma lactate of more than 5mmol/L.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 690,
+    "id": 5
+  },
+  {
+    "claim": "Chronic aerobic exercise alters endothelial function, improving vasodilating mechanisms mediated by NO.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 261,
+    "id": 6
+  },
+  {
+    "claim": "Immune complex triggered cell death leads to extracellular release of neutrophil protein HMGB1.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 554,
+    "id": 7
+  },
+  {
+    "claim": "ITAM phosphorylation prevents the transfer of the T cell receptor (TCR) signal from the echo-domain to the cytoplasmic tail of the T cell receptor (TCR).",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 551,
+    "id": 8
+  },
+  {
+    "claim": "Participating in six months of physical activity improves cognitive functioning.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 921,
+    "id": 9
+  },
+  {
+    "claim": "CCL19 is absent within dLNs.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 198,
+    "id": 10
+  },
+  {
+    "claim": "Normal expression of RUNX1 has tumor-promoting effects.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 859,
+    "id": 11
+  },
+  {
+    "claim": "N348I mutations cause resistance to zidovudine (AZT).",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 823,
+    "id": 12
+  },
+  {
+    "claim": "Rapid phosphotransfer rates govern fidelity in two component systems",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 1019,
+    "id": 13
+  },
+  {
+    "claim": "Synaptic activity enhances local release of brain derived neurotrophic factor from postsynaptic dendrites.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 1121,
+    "id": 14
+  },
+  {
+    "claim": "In mice, P. chabaudi parasites are able to proliferate faster early in infection when inoculated at lower numbers than when inoculated at high numbers.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 577,
+    "id": 15
+  },
+  {
+    "claim": "LDL cholesterol has no involvement in the development of cardiovascular disease.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 674,
+    "id": 16
+  },
+  {
+    "claim": "CX3CR1 on the Th2 cells suppresses airway inflammation.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 219,
+    "id": 17
+  },
+  {
+    "claim": "Rapid up-regulation and higher basal expression of interferon-induced genes reduce survival of granule cell neurons that are infected by West Nile virus.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 1021,
+    "id": 18
+  },
+  {
+    "claim": "Mutant mice lacking SVCT2 have greatly increased ascorbic acid levels in both brain and adrenals.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 811,
+    "id": 19
+  },
+  {
+    "claim": "Leuko-increased blood increases infectious complications in red blood cell transfusion.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 692,
+    "id": 20
+  },
+  {
+    "claim": "Auditory entrainment is strengthened when people see congruent visual and auditory information.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 141,
+    "id": 21
+  },
+  {
+    "claim": "TNFAIP3 is a tumor suppressor in glioblastoma.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 1137,
+    "id": 22
+  },
+  {
+    "claim": "New drugs for tuberculosis often do not penetrate the necrotic portion of a tuberculosis lesion in high concentrations.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 847,
+    "id": 23
+  },
+  {
+    "claim": "Autophagy declines in aged organisms.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 148,
+    "id": 24
+  },
+  {
+    "claim": "Silencing of Bcl2 is important for the maintenance and progression of tumors.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 1088,
+    "id": 25
+  },
+  {
+    "claim": "Microarray results from culture-amplified mixtures of serotypes correlate poorly with microarray results from uncultured mixtures.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 785,
+    "id": 26
+  },
+  {
+    "claim": "AMP-activated protein kinase (AMPK) activation increases inflammation-related fibrosis in the lungs.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 54,
+    "id": 27
+  },
+  {
+    "claim": "Asymptomatic visual impairment screening in elderly populations does not lead to improved vision.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 137,
+    "id": 28
+  },
+  {
+    "claim": "Golli-deficient T-cells prefer to differentiate into an anergic phenotype in the adaptive immune response when there are increased levels of Ca2+ in the cytosol.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 478,
+    "id": 29
+  },
+  {
+    "claim": "Cells lacking clpC have a defect in sporulation efficiency in Bacillus subtilis.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 237,
+    "id": 30
+  },
+  {
+    "claim": "Only a minority of cells survive development after differentiation into stress-resistant spores.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 887,
+    "id": 31
+  },
+  {
+    "claim": "ALDH1 expression is associated with poorer prognosis in breast cancer.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 53,
+    "id": 32
+  },
+  {
+    "claim": "High levels of CRP reduces the risk of exacerbations in chronic obstructive pulmonary disease (COPD).",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 516,
+    "id": 33
+  },
+  {
+    "claim": "IgA plasma cells that are specific for transglutaminase 2 accumulate in the duodenal mucosa on commencement of a gluten-free diet.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 552,
+    "id": 34
+  },
+  {
+    "claim": "Febrile seizures increase the threshold for development of epilepsy.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 410,
+    "id": 35
+  },
+  {
+    "claim": "PDPN promotes efficient motility along stromal surfaces by activating the C-type lectin receptor to rearrange the actin cytoskeleton in dendritic cells.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 904,
+    "id": 36
+  },
+  {
+    "claim": "CR is associated with higher methylation age.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 212,
+    "id": 37
+  },
+  {
+    "claim": "The binding orientation of the ML-SA1 activator at hTRPML2 is different from the binding orientation of the ML-SA1 activator at hTRPML1.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 1200,
+    "id": 38
+  },
+  {
+    "claim": "Transplanted human glial cells can differentiate within the host animal.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 1319,
+    "id": 39
+  },
+  {
+    "claim": "Albendazole is used to treat lymphatic filariasis.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 94,
+    "id": 40
+  },
+  {
+    "claim": "Low nucleosome occupancy correlates with low methylation levels across species.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 718,
+    "id": 41
+  },
+  {
+    "claim": "Commelina yellow mottle virus' (ComYMV) genome consists of 7489 baise pairs.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 279,
+    "id": 42
+  },
+  {
+    "claim": "PD-1 triggering on monocytes reduces IL-10 production by monocytes.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 903,
+    "id": 43
+  },
+  {
+    "claim": "Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is effective at treating KRAS mutant tumors.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 275,
+    "id": 44
+  },
+  {
+    "claim": "Cataract and trachoma are the primary cause of blindness in Southern Sudan.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 232,
+    "id": 45
+  },
+  {
+    "claim": "Cytochrome c is released from the mitochondrial intermembrane space to cytosol during apoptosis.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 298,
+    "id": 46
+  },
+  {
+    "claim": "Cold exposure increases BAT recruitment.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 268,
+    "id": 47
+  },
+  {
+    "claim": "Incidence of heart failure decreased by 10% in women since 1979.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 593,
+    "id": 48
+  },
+  {
+    "claim": "The loss of the TET protein functions may have dire biological consequences, such as myeloid cancers.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 1226,
+    "id": 49
+  },
+  {
+    "claim": "AIRE is expressed in some skin tumors.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 50,
+    "id": 50
+  },
+  {
+    "claim": "Enhanced early production of inflammatory chemokines improves viral control in the lung.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 380,
+    "id": 51
+  },
+  {
+    "claim": "CRP is not predictive of postoperative mortality following Coronary Artery Bypass Graft (CABG) surgery.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 213,
+    "id": 52
+  },
+  {
+    "claim": "Articles published in open access format are more likely to be cited than traditional journals.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 130,
+    "id": 53
+  },
+  {
+    "claim": "Transplanted human glial progenitor cells are incapable of forming a neural network with host animals' neurons.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 1320,
+    "id": 54
+  },
+  {
+    "claim": "Reduced responsiveness to interleukin-2 in regulatory T cells is associated with greater resistance to autoimmune diseases such as Type 1 Diabetes.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 1029,
+    "id": 55
+  },
+  {
+    "claim": "Taking 400mg of α-tocopheryl acetate helps to prevent prostate cancer.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 1140,
+    "id": 56
+  },
+  {
+    "claim": "DMRT1 is a sex-determining gene that is epigenetically regulated by the MHM region.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 303,
+    "id": 57
+  },
+  {
+    "claim": "The ureABIEFGH gene cluster is induced by nickel (II) ion.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "SciFact",
+    "scifact_id": 1281,
+    "id": 58
+  },
+  {
+    "claim": "Macropinocytosis contributes to a cell's supply of amino acids via the intracellular uptake of protein.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "SciFact",
+    "scifact_id": 744,
+    "id": 59
+  },
+  {
+    "claim": "Bone marrow cells contribute to adult macrophage compartments.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "SciFact",
+    "scifact_id": 183,
+    "id": 60
+  }
+]

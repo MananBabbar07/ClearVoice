@@ -1,11 +1,12 @@
-import os
-import time
-import threading
 import logging
-from dotenv import load_dotenv
-from Bio import Entrez
-from sentence_transformers import SentenceTransformer
+import os
+import threading
+import time
+
 import numpy as np
+from Bio import Entrez
+from dotenv import load_dotenv
+from sentence_transformers import SentenceTransformer
 
 load_dotenv()
 

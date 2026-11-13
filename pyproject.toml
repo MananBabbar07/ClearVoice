@@ -1,0 +1,34 @@
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+extend-exclude = [
+    "backend/app/ingest.py",
+    "backend/app/database.py",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B", "UP"]
+ignore = ["B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"backend/main.py" = ["E402"]
+"backend/app/agents/*.py" = ["E402"]
+"tests/conftest.py" = ["E402"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.coverage.run]
+source = ["backend"]
+omit = [
+    "backend/app/ingest.py",
+    "backend/app/database.py",
+]
+
+[tool.coverage.report]
+fail_under = 80
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+]

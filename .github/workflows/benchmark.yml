@@ -1,0 +1,81 @@
+name: Benchmark
+
+on:
+  workflow_dispatch:
+    inputs:
+      baseline_accuracy:
+        description: Minimum required accuracy percentage (0-100)
+        required: false
+        default: "0"
+        type: string
+  schedule:
+    - cron: "0 6 * * 1"
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-22.04
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Cache Hugging Face models
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-cache-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+
+      - name: Flush Redis cache before cold benchmark
+        env:
+          REDIS_URL: redis://localhost:6379/0
+        run: python -c "import os, redis; redis.from_url(os.environ['REDIS_URL']).flushdb()"
+
+      - name: Run benchmark against local API
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          REDIS_URL: redis://localhost:6379/0
+          API_URL: http://127.0.0.1:8000
+          BASELINE_ACCURACY: ${{ inputs.baseline_accuracy || '0' }}
+          BENCHMARK_DELAY: "5"
+        run: |
+          uvicorn backend.main:app --host 127.0.0.1 --port 8000 &
+          SERVER_PID=$!
+          trap "kill $SERVER_PID 2>/dev/null || true" EXIT
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:8000/health >/dev/null 2>&1; then
+              break
+            fi
+            sleep 2
+          done
+          curl -fsS http://127.0.0.1:8000/health
+          python benchmark.py
+
+      - name: Upload benchmark results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: benchmark_results.json
+

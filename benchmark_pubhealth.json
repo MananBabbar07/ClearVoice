@@ -1,0 +1,506 @@
+[
+  {
+    "claim": "A trojan worm known as Koobface is \"spreading like wildfire\" via Facebook.",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "Warnings about a 'Koobface virus' spreading via Facebook are several years out of date,",
+    "id": 1
+  },
+  {
+    "claim": "A viral warning claims that a drug called burundanga on a business card poisoned a woman and advises people to beware of what has become known as “the zombie drug.”",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "Beware of Burundanga on Business Cards",
+    "id": 2
+  },
+  {
+    "claim": "Judge considers Hammond Ranches grazing permit.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "A judge in Portland, Oregon, heard arguments Thursday about whether the U.S. government was right to renew the grazing permits of two ranchers who were pardoned last year by President Donald Trump on an arson conviction for setting fire to federal lands.",
+    "id": 3
+  },
+  {
+    "claim": "After passing a bill to make consuming raw milk legal in the state, several members of the West Virginia legislature fell ill due to drinking raw milk to celebrate the bill becoming law.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "Philippine President Rodrigo Duterte’s war on drugs has only managed to curb the supply of methamphetamines by less than 1% of annual consumption, proof that it has been a bloody failure, his main political rival, the vice president, said on Monday.",
+    "id": 4
+  },
+  {
+    "claim": "A Twitter user responded to Stephen King's assertion the COVID-19 pandemic was \"not like The Stand,\" sincerely asking King if he \"even read\" a book he actually wrote.",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "Stephen King ‘Coronavirus Is not Like ‘The Stand’ Response Tweet",
+    "id": 5
+  },
+  {
+    "claim": "Quotes Sen. Lindsey Graham as saying President Trump “probably knows more about medicine and specifically viruses than any of the so-called scientists at the NIH and CDC.”",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "Sen. Lindsey Graham didn’t say that President Trump probably knows more about medicine and viruses than medical professionals. The quote was fabricated by a Twitter account that has posted fake statements in the past.",
+    "id": 6
+  },
+  {
+    "claim": "According to an unnamed critical care physician working in Italy, emergency rooms in the country were running at 200 percent capacity because of a novel coronavirus.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "Unsourced ‘Intensivist’ Thread Spreads on Twitter as COVID-19 Hits Italy",
+    "id": 7
+  },
+  {
+    "claim": "An immigrant put peanut butter in a little girl's sandwich causing her to have an allergic reaction.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "Although it is possible the peanut butter could have been put in the sandwich due to a language barrier, the lawsuit does not say that was the case. Nowhere in the lawsuit is a language barrier — or presence of an immigrant worker — mentioned. Further, the girl’s father did not believe that to be a probable explanation, given the similarities between the English and Spanish words for “allergy.” That claim seems to have been taken out of context from the Boston Globe’s reporting and then manipulated to suit a political agenda.",
+    "id": 8
+  },
+  {
+    "claim": "New study: The flu vaccine is 'significantly associated' with an increased risk of coronavirus",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "The study featured in the article is from 2019 and the data for it was collected in 2017-18, so it doesn’t include COVID-19 information. In past fact-checks, experts said this connection between the flu vaccine and other viruses is still speculative.",
+    "id": 9
+  },
+  {
+    "claim": "Under a new law regulating abortions, \"Even if you're raped, if you don't report it in the first 30 days, the Republicans will force you to have an ultrasound.",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "Barca said that a new law passed by Republicans regulating abortion deals with sexual assault victims this way: \"Even if you're raped, if you don't report it in the first 30 days, the Republicans will force you to have to have an ultrasound.\" The law does require an ultrasound when such victims do not report the assault to law enforcers, but there is no 30-day deadline for doing so. Barca’s claim is partially accurate but misses on an important detail that muddles his message.",
+    "id": 10
+  },
+  {
+    "claim": "Teen eating habits may help cut breast cancer risk",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "This story focuses on a recent study from the journal Pediatrics, which found that women who ate more dietary fiber during adolescence and young adulthood had a lower risk of developing breast cancer. The story does a nice job of addressing the strengths and weaknesses of the study — as does a competing story we reviewed from NPR. However, as with the NPR story, this story would have been even better if it had explained that the 16% lower risk of cancer was a relative risk reduction, and that the absolute difference was a mere 0.2 percentage point. Moreover, the story would have been improved by the use of more appropriate language in the headline — this type of study can’t tell us whether fiber “may help cut breast cancer risk,” and the story should’ve reflected that uncertainty in its headline description. According to the CDC, breast cancer is the most common cancer in women in the United States, with more than 224,000 new cases reported in 2012 alone. Findings that early life experiences (diet and behavior) affect later chance of malignancy and heart disease are beginning to emerge. This should be intuitive, but is hard to show in studies because of the very long periods between the early life experiences and later health outcomes.",
+    "id": 11
+  },
+  {
+    "claim": "UN: Nearly a half-billion in Asia-Pacific still going hungry.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "Nearly a half-billion people in the Asia-Pacific are still malnourished and eliminating hunger by 2030 requires that millions escape food insecurity each month, according to a report released Wednesday by UN agencies.",
+    "id": 12
+  },
+  {
+    "claim": "Gene therapy raises hope for a future AIDS cure",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "Our one criticism is for the headline writer, who had to frame it as “hope for a future AIDS cure” despite these caveats in the body of the story:  It’s far too early to know if this scientific first will prove to be a cure, or even a new treatment. The research was only meant to show that, so far, it seems feasible and safe. A researcher “warned that it would be ‘way overstated’ to suggest that the results so far are a possible cure”  A competing MedPage Today story had this headline: “HIV-Resistant T Cells on Horizon.” That story said that the researchers “cautioned reporters not to use the word “cure” at this early stage. But this AP story still used the word “cure” 12 times. It is possible to report on very preliminary research – even involving only six people – and even on a topic like HIV/AIDS – and to do so in a reasonable way. This story achieved that goal – despite the repeated use of “cure”.",
+    "id": 13
+  },
+  {
+    "claim": "California rejects unique intersex surgery ban for some kids.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "California lawmakers have rejected what would have been a first-of-its-kind ban on medically unnecessary treatment for infants born with ambiguous or conflicting genitalia.",
+    "id": 14
+  },
+  {
+    "claim": "Donald Trump divorced Ivana Trump because her breast implants were imperfect, and he leaked that information to New York tabloids while they were married.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "It’s certainly possible that some version of the rumor may be true, but we haven’t unearthed any proof that Donald Trump ever directly, indirectly, or privately made the comments attributed to him about Ivana Trump’s breast implants, nor that he divorced her because of aesthetic differences about their suitability.",
+    "id": 15
+  },
+  {
+    "claim": "Maj. Nidal Hasan, the man accused of the Fort Hood shootings, \"was an ADVISOR to the Obama Administration.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "Chain e-mail links supected Fort Hood shooter to Obama",
+    "id": 16
+  },
+  {
+    "claim": "Dry needling offers alternative to cortisone injection for hip pain",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "This news release from an orthopedics journal relates a study finding that dry needling, which uses filament needles to stimulate trigger points in the muscles, is just as effective as cortisone injections when it comes to reducing pain and swelling caused by greater trochanteric pain syndrome (GTPS), a common hip condition. We applaud its restrained tone but would have liked to get a sense of how much symptom improvement patients experienced during the six-week trial as well as a discussion of costs and availability of these two treatment options. This release says the effectiveness of steroid injections “is increasingly being questioned. An equally effective treatment with fewer adverse side effects would be beneficial.” To conclude that dry needling is “not inferior” to a treatment that isn’t very effective doesn’t say much. There is no slam-dunk treatment for chronic hip pain. But if it comes with low risk and a modest cost, dry needling might be an alternative to steroids for combating chronic pain. Also, dry needling might offer an option for patients who haven’t felt relief from steroids or are precluded from taking them due to medication interactions. As the release states, GTPS is very common and at times very painful. A safe, successful treatment that rapidly resolves pain (beyond normal natural healing) would benefit many individuals. A specific risk profile of a single cortisone injection in the soft tissues has not been determined but most researchers and practicing physicians would consider it to be minimal.",
+    "id": 17
+  },
+  {
+    "claim": "House Bill 330 \"grants immunity from liability to motorists who strike protesters.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "Cooper overstates what this bill would do. And legal experts say that, while untested, the bill doesn't appear to change litigation and might not offer any additional protections at all.",
+    "id": 18
+  },
+  {
+    "claim": "New Portable Scanner for Breast Cancer",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "Nowhere do we hear how far along the research is. The main section doesn’t even allude to evidence, other than to state that more research is to be done, which is true about most everything in medicine except limes for scurvy. As far as a reader can tell, the “new portable scanner” may have yet to leave a laboratory setting. All we know is that it’s been submitted to, and is a finalist for, an engineering & technology award. It’s not the same as clinical research. The article is quick to point out mammography’s low detection rates (sensitivity, perhaps?) in younger women, identifying the problem to be solved, but it never tells us the detection rates for the new tool. The data very well may be unknown. Which means detection rates could be worse! But from the structure of this article, focusing on technology but not evidence, a reader could only conclude the new kid on the block is superior. If we’re lucky, the new kid will make the world a better place. But filing a patent for a device is not the same level of proof as clinical research. People would be shocked to learn how many promising ideas from labs and napkins never survive clinical trials, how many prove to be worse for mankind than what we already do. Science is hard and complex. Last year’s uproar over the new mammography guidelines highlighted that there are important subtleties about screening for cancer, and that clear, balanced communication is crucial. It may sound like we ask a lot of journalists. But really, asking one more question would’ve turned this story around: How far along is this idea? The answer leads us to look beyond the novelty, beyond the theoretical benefits, beyond the entangled claims of the institution and inventor who stand to benefit, and see, simply, whether this idea is better or worse or needs 4 more years in the oven before we can even ask. Mammography isn’t perfect, and an improved screening technique for breast cancer could reduce pain, suffering, and death for many women. But that need doesn’t give journalists a license to hype.",
+    "id": 19
+  },
+  {
+    "claim": "The UK is performing 240,000 Covid-19 tests a day.",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "The U.S. investigation into hundreds of cases of life-threatening lung illnesses related to vaping has turned up a curious abnormality: Many of the victims had pockets of oil clogging up cells responsible for removing impurities in the lungs.",
+    "id": 20
+  },
+  {
+    "claim": "Experimental Drug Raises Good Cholesterol Levels in Early Trial",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "Beginning with the lead and continuing throughout, the story reminded readers of the limitations of this trial and that questions about health benefits will have to wait for the next round of experimentation. However, although this story gives readers a balanced view of what researchers reported, it should have told them that the trial was sponsored by a drug company and that the lead researcher has financial ties to that company and others in the field. When a trial is designed to test safety, stories about the results should focus on that question without wandering off into speculation about health benefits that have yet to be put to the test. That’s what this story does. Over 20 million Americans currently take statin drugs. Anacetrapib works on cholesterol in a different way, by inhibiting a protein called CETP (cholesterol ester transfer protein). These drugs also offer hope to drug companies that are losing patent protection on the leading brands of statins. That marketing angle means journalists need to be vigilant about claims of benefits. The early tests of an earlier CETP inhibitor, torcetrapib, also indicated powerful effects on cholesterol, especially in raising levels of the “good” HDL form. However, as this story notes, larger trials then discovered dangerous side effects. It turned out that drug actually caused more heart problems than it prevented. In reality it takes a lot of subjects to even begin to get a picture of the risks and benefits of a new drug. While encouraging, the results of this study are far from conclusive.",
+    "id": 21
+  },
+  {
+    "claim": "Some cardiologists estimate \"70 percent of all males over 50 have some form of heart disease.",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "Gordon Quan, Harris County candidate, says 70 percent of males over 50 have a form of heart disease",
+    "id": 22
+  },
+  {
+    "claim": "The Massachusetts health care plan is \"wildly unpopular\" among state residents.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "Laura Ingraham says Massachusetts health plan is \"wildly unpopular\"",
+    "id": 23
+  },
+  {
+    "claim": "Judge weighs whether NC schools conspired to depress wages.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "A federal judge is deciding whether an alleged conspiracy between two neighboring research universities potentially depressed the wages of thousands of medical professionals in North Carolina.",
+    "id": 24
+  },
+  {
+    "claim": "Shire Announces Positive Results of SHP465 Safety and Efficacy Study in Children and Adolescents with ADHD",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "This news release announces the results of a randomized, controlled Phase 3 clinical trial of a long-acting stimulant drug for the treatment of attention-deficit/hyperactivity disorder (ADHD) in children and adolescents. The pharmaceutical company Shire completed this follow-up trial on the drug’s safety and efficacy after the Food and Drug Administration (FDA) required more data when Shire first sought approval for the drug. The drug was tested in children and adolescents aged 6-17 years old with ADHD. The company claims that the drug showed significant improvement in both children and adolescents when compared with a placebo and on the clinical global impression improvement scale, a standardized measurement of improvement. While the release is clearly targeted to investors and financial reporters, it was distributed and made available to a wide public audience. Just because a release is written for a business audience does not mean it should skimp on transparency. Its biggest weakness is the strong claims it makes without providing any links or references to published research where the results can be evaluated. We perused the company’s website for details of the study but came up empty-handed. The news release doesn’t mention the lead investigator’s financial relationship with the drug sponsor, projected costs of the new drug, nor make any comparisons with numerous similar drugs already on the market. This news release matters to the company since it is aiming to launch a new formulation (currently referred to as SHP465) of a drug similar to Adderall, also developed by Shire, which faces generic competitors. The new formulation essentially comes with a new patent for an old drug — the main difference being a longer half-life (or longer daytime effect) — 16 hours versus 12 hours for the current Adderall extended release pill. As the news release states, this new launch would extend Shire’s patent on its “ADHD Franchise” for many years: “Protection for Shire‘s ADHD Franchise Extends to 2029 “There are patents supporting Shire’s overall ADHD franchise in the U.S. that extend to 2029. With a launch planned for the second half of  2017, Shire expects that SHP465, following potential FDA approval, will have three years of Hatch-Waxman exclusivity and at least three patents listed in the FDA Orange Book expiring as late as May 2029.” The news of a new drug formulation might be important for children and adolescents with ADHD who are frequently given amphetamines to treat their symptoms. But it is unclear how this drug differs from existing amphetamines already in use.",
+    "id": 25
+  },
+  {
+    "claim": "A woman encountered kidnapping scouts at a Houston Target.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "Yet another Facebook user claimed she narrowly avoided human trafficking scouts at Target, this time in Houston.",
+    "id": 26
+  },
+  {
+    "claim": "Researchers produce first widely protective vaccine against chlamydia",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "In many ways, this release provides much of the basic information reporters would need to determine how newsworthy the findings are. Where it was published. The specific antigen being studied and for which disease. A numerical breakdown of the benefits. But nowhere does it mention that this was a study conducted in mice and that, if past experiences with vaccines for other diseases hold true, a true vaccine for humans has a narrow chance of becoming a reality. Chlamydia is the most commonly reported sexually transmitted disease (STD) in the United States, according to the Centers for Disease Control and Prevention. The CDC says the condition is easily treated, but if left untreated, can make it difficult for a woman to become pregnant A further complication of chlamydia is that it often carries no symptoms, so someone who is infected may not even know it. A safe and effective vaccine would certainly be of public health interest. But this research has to far to go before it will be available to the public — if ever.",
+    "id": 27
+  },
+  {
+    "claim": "Donald Trump Jr. tweeted, \"Do you know what's deplorable? Being impeached!\" to the Clintons in September 2016.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "‘Do You Know What’s Deplorable? Being Impeached’ Tweet",
+    "id": 28
+  },
+  {
+    "claim": "Talk radio host Rush Limbaugh was disqualified from the Vietnam-era draft due to a pilonidal cyst.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "There is, of course, a huge difference between draft evasion (or “draft dodging”) and draft avoidance: The former involves the use of unethical or illegal means (e.g., bribing a doctor to falsify a medical report, fleeing the country) to escape military service; the latter involves taking advantage of established legal means (e.g., college deferments, conscientious objector status) to avoid or delay military service. The issue discussed here is clearly not one of draft evasion, and the matter of who is justified in criticizing whom for not serving in Vietnam is a gray area to be hashed out in the public arena. The only conclusions drawn here are that Rush Limbaugh was ineligible for the draft due to a physical condition, that he had a pilonidal cyst, and that if there’s an explanation for his draft status other than the cyst, he has yet to offer it.",
+    "id": 29
+  },
+  {
+    "claim": "Neomycin sulphate, an antibiotic, is in vaccines and can lead to epilepsy, brain damage and allergic reactions.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "Trace amounts of this antibiotic may end up in certain vaccines. If you are allergic to it could cause an allergic reaction.",
+    "id": 30
+  },
+  {
+    "claim": "A daily regimen of ingesting gin-soaked raisins will help relieve arthritis symptoms.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "Gin has been featured in non-raisin arthritis cures, including one that made the news in Baltimore in 1956. In that incident, an elderly Chinese man was bitten by one of the seven rattlesnakes he’d purchased for the purpose of creating an arthritis cure that involved pickling the serpents in gin for a year.",
+    "id": 31
+  },
+  {
+    "claim": "Tommy Robinson was jailed in order to silence his reporting on a sex abuse trial in England, and to \"protect Muslim pedophiles.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "In particular, judges are sensitive to the publication of even accurate news reports in circumstances where two separate trials are linked. In that way, the “prejudice” being avoided can relate to the same trial or a future trial involving the same defendants or complainants, or relating to the same events or circumstances.",
+    "id": 32
+  },
+  {
+    "claim": "U.S. President Donald Trump cut funding for the Centers for Disease Control and Prevention (CDC).",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "What's true: The Trump administration's proposed 2021 budget includes cuts to the CDC's activities related to chronic disease. What's false: Congress hasn't approved the budget, so CDC funding in 2021 remains unclear.",
+    "id": 33
+  },
+  {
+    "claim": "Photographs show a new Chinese aircraft carrier.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "Do photographs show a new Chinese aircraft carrier?",
+    "id": 34
+  },
+  {
+    "claim": "Worried About Dementia? You Might Want to Check Your Blood Pressure",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "This NPR report built around exhortations to control blood pressure by the head of a federal health agency draws attention to the long-documented links between hypertension and some forms of dementia. For many, many reasons, diagnosing and treating high blood pressure are good ideas for maintaining health and preventing strokes and heart disease, and the better news is that there are dozens of drugs and lifestyle changes available — some of them very inexpensive — to help people do so. But this story doesn’t explain that the evidence for an association between high blood pressure and vascular dementia, much less Alzheimer’s disease, is so far mostly observational. And perhaps more significantly, the story carries no data at all to support even the claims or strengths/weaknesses of the association. This NPR story missed an opportunity to offer the data and help the public understand more about risk assessment and probabilities of disease related to blood pressure. And it may mislead people into thinking that if they pop a pressure pill each day, they will avoid Alzheimer’s Disease. That’s unproven.",
+    "id": 35
+  },
+  {
+    "claim": "More support for osteoporosis drugs",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "This thorough, well-researched story focuses on the debate over how and whether bisphosphonates should be used to treat osteoporosis, and provides a general overview of the related risks and potential benefits. The story does many things well — and addresses cost, potential conflicts of interest, and disease mongering particularly well. However, the story cites benefit numbers from a recent New England Journal of Medicine paper without giving readers any information about the study or where those numbers came from. Providing more context on those benefit numbers would have made the story stronger. Osteoporosis is not uncommon. Estimates of osteoporosis occurrence (and severity) vary, but a 2014 study estimated that more than 10 million people in the U.S. have osteoporosis. Osteoporosis increases the risk of bone injuries, such as hip fractures, that can have significant impacts on a patient’s health and quality of life. A 2007 study estimated that 65 percent of women who develop osteoporosis, and 42 percent of men who develop osteoporosis, will suffer a bone fracture in their lifetime. In short, many people will have to make decisions about how to prevent or treat osteoporosis. If there are complicated issues surrounding widely-used treatment options — as is the case with bisphosphonates — there is real value in news stories that attempt to untangle those issues for readers. That also makes it particularly important for such stories to clearly address everything from the financial ties of expert sources to the quality of the evidence tied to health risks and benefits.",
+    "id": 36
+  },
+  {
+    "claim": "Muslim nurses now have the \"option of participating in medical operations without washing their hands.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "Q: Are Muslim nurses excused from washing their hands before medical procedures in Britain? A: No. That is an old misrepresentation that has been circulating online since 2010.",
+    "id": 37
+  },
+  {
+    "claim": "Policies that legalize recreational marijuana exacerbate America’s opioid addiction epidemic.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "However, as noted in the the National Academies of Sciences review, the recent adoption of recreational marijuana laws and therefore the dearth of high quality studies make it impossible (at this time) to fully reject a connection between recreational pot and opioid addiction.",
+    "id": 38
+  },
+  {
+    "claim": "Fitness experts separate folklore from fact.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "Can crunches create six-pack abdominal muscles? Do weight-lifting women risk bulging biceps? Is stretching always a good idea?",
+    "id": 39
+  },
+  {
+    "claim": "Polysorbate 80 and 20 are in vaccines and cause cancer in animals and are linked to autoimmune issues and infertility.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "Tiny amounts of Polysorbate 80 is in a type of flu vaccine. There isn’t evidence ingesting it is linked to these issues in humans.",
+    "id": 40
+  },
+  {
+    "claim": "Treating at the Earliest Sign of MS May Offer Long-Term Benefit",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "This release summarizes a study that followed 11-year treatment outcomes of two groups of patients with early symptoms of multiple sclerosis (MS). All of the patients had experienced a first episode suggestive of MS, called clinically isolated syndrome (CIS), and a  magnetic resonance imaging (MRI) scan suggesting MS. Up to 85 percent of people with CIS go on to develop MS. The two patient groups were randomized to either receive interferon beta-1 by injection immediately or receive a placebo for two years. After two years, the placebo group could receive their treatment of choice. The patients who received the drug immediately appeared to have fewer relapses over the 11 years of study, according to the lead author, but no advantages were observed in other patient outcomes such as overall disability and MRI scans. The release would have been stronger if it provided more context for judging the reduced number of relapses, especially in light of the two groups showing no difference in disability. The release also omitted mention of significant potential conflicts of interest, the high annual cost of interferon beta-1 and the drug’s side effects. Society faces tough questions because of the high prices of drugs that target the immune system, such as interferon beta-1b for multiple sclerosis. This news release suggests drug therapy should begin sooner for patients without including any of the controversy on cost playing out in the United States and Europe. Last year authors of a different research study, also published in Neurology, called the rise in MS drug prices “alarming” and wrote it was also puzzling, since some of the drugs are not new. “Why the costs of MS DMTs [disease modifying therapies] in the United States have risen so dramatically is uncertain. However, the simplest explanation is that pharmaceutical companies raise prices of new and old MS DMTs in the United States to increase profits and our health care system puts no limits on these increases,’ they wrote. Why is cost so important to mention? This drug study, in particular, has significant potential conflicts of interest, discussed below under the Funding Sources & Conflict of Interest Disclosure criteria.",
+    "id": 41
+  },
+  {
+    "claim": "A Time magazine cover from 1977 with the title “The Big Freeze” is an example of media fearmongering over  “global cooling” in the 1970s.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "Because the cover in question is about a wholly unrelated topic to the one WWUT for some reason ascribes to it, we rank the remarkably superficial claim that this cover is about the concept of “global cooling” as false.",
+    "id": 42
+  },
+  {
+    "claim": "A video shows a bolt of lightning striking a river, sparking a large explosion.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "While we do not advise hopping into an outdoor pool during a raging thunderstorm, we can assure you that should you disregard that advice and lightning strikes during your swim, it may be exceedingly unpleasant — but it won’t look like these videos.",
+    "id": 43
+  },
+  {
+    "claim": "Ohio officials say tick-borne Lyme Disease still a threat.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "The Ohio Department of Health says hunters and those trekking in wooded areas should use bug spray and take other precautions even in cold weather to prevent being infected with tick-borne Lyme disease.",
+    "id": 44
+  },
+  {
+    "claim": "Nathan Phillips falsely claimed to be a U.S. military veteran who served in the Vietnam War.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "What's true: Native American activist Nathan Phillips said he served in the U.S. Marines and told news outlets that he was a \"Vietnam-times\" or \"Vietnam-era\" veteran. What's false: Contrary to what multiple news reports initially stated, Nathan Phillips was not deployed to Vietnam at any time during his military service.",
+    "id": 45
+  },
+  {
+    "claim": "Today’s marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "Heidi Heilman said, \"Today’s marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.\" Long-term testing shows that, on average, today's marijuana is three times more potent than pre-1993 marijuana and eight times more potent than grass seized in 1976 and earlier.",
+    "id": 46
+  },
+  {
+    "claim": "Muslim girls buried alive by their father are fed and comforted by Jesus until rescuers come for them.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "Variations:   A December 2007 version added the information that the Muslim man killed his wife “because she was reading the Bible.”",
+    "id": 47
+  },
+  {
+    "claim": "Ted Cruz Says both Donald Trump and Hillary Clinton say Planned Parenthood is \"terrific and that it should keep taxpayer funding.",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "Cruz said both Donald Trump and Hillary Clinton say Planned Parenthood is \"terrific and that it should keep taxpayer funding.\" Trump and Clinton seem to agree that Planned Parenthood does some positive work as it pertains to things like cancer prevention, and Trump has described that work as \"wonderful.\" However, Clinton supports their abortion services, and Trump does not. He thinks Planned Parenthood should not receive taxpayer dollars as long as they provide abortions. Clinton, on the other hand, has said Planned Parenthood should receive even more funding than it does now.",
+    "id": 48
+  },
+  {
+    "claim": "Deborah Harry was nearly abducted by serial killer Ted Bundy in New York and narrowly escaped with her life.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "Details of the Blondie singer's claim of a close encounter with infamous serial killer Ted Bundy in New York don't check out.",
+    "id": 49
+  },
+  {
+    "claim": "Disability rights advocates sue Montana over Medicaid cuts.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "Montana disability rights advocates sued the state health department Tuesday seeking to overturn cuts in Medicaid reimbursement rates that have led to a loss of services and put clients at increased risk of institutionalization.",
+    "id": 50
+  },
+  {
+    "claim": "Novartis's new treatment for hives outperforms Xolair in trials.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "Novartis said on Tuesday it was taking its experimental medicine ligelizumab to late-stage trials after the drug showed signs of outperforming existing product Xolair in treating severe urticaria, also known as hives.",
+    "id": 51
+  },
+  {
+    "claim": "A Tennessee boy died in the arms of a local man portraying Santa Claus during a hospital visit.",
+    "expected": "INSUFFICIENT EVIDENCE",
+    "category": "insufficient",
+    "source": "PUBHEALTH",
+    "original_label": "unproven",
+    "explanation": "In this way, this particular Santa tale served an instructive purpose: it showed how an unvetted story can spread regardless of how true it might be, with each news outlet repeating it making it seem that much closer to the truth until it is, at last, uncritically reported as fact.",
+    "id": 52
+  },
+  {
+    "claim": "‘Critical moment’ for firms amid retirements, opioid crisis.",
+    "expected": "TRUE",
+    "category": "true",
+    "source": "PUBHEALTH",
+    "original_label": "true",
+    "explanation": "For the first time since the recession hit a decade ago, the demand for workers is steady.",
+    "id": 53
+  },
+  {
+    "claim": "A clause in the document annexing Texas to the United States allowed for Texas to be divided into five different states.",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "Another Texas-related legend holds that the Texans negotiated an annexation treaty which reserved to them the right to secede from the Union without the consent of the U.S. Congress, but the terms of Texas’ annexation contain no such provision.",
+    "id": 54
+  },
+  {
+    "claim": "“Does the #DemConvention know @NYGovCuomo forced nursing homes across NY to take in COVID positive patients and planted the seeds of infection that killed thousands of grandmothers and grandfathers?”",
+    "expected": "FALSE",
+    "category": "false",
+    "source": "PUBHEALTH",
+    "original_label": "false",
+    "explanation": "New York Governor Andrew Cuomo has been dogged by criticism for months over his March advisory directing nursing homes in the state to accept patients who had or were suspected of having COVID-19. In May, the governor amended the March order, prohibiting hospitals from discharging patients to nursing homes unless they tested negative for COVID-19. The state health department issued a report in July that concluded the deadly coronavirus was introduced by nursing home staffers rather than sick patients. Though some epidemiologists and nursing home advocates questioned the report’s methods and findings, public health experts agreed with the report’s conclusion — based on the timeline — that nursing home staffers and visitors, before they were banned, were likely the main drivers of COVID-19 infection and death in nursing homes.",
+    "id": 55
+  },
+  {
+    "claim": "University of Findlay research students discovered a chemical compound that kills glioblastoma cells.",
+    "expected": "MISLEADING",
+    "category": "misleading",
+    "source": "PUBHEALTH",
+    "original_label": "mixture",
+    "explanation": "Did University of Findlay Students Discover a Chemical Compound that Kills Glioblastoma?",
+    "id": 56
+  }
+]

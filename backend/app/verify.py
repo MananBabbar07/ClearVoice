@@ -1,10 +1,9 @@
 
-import os
 import json
-from dotenv import load_dotenv
+import os
+
 from groq_client import call_groq
 from utils import smart_slice
-
 
 
 def extract_json(raw: str) -> dict:
