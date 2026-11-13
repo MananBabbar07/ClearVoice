@@ -127,7 +127,11 @@ def run_benchmark(
     retry_delay: Optional[float] = None,
     timeout: Optional[float] = None,
 ) -> dict:
-    resolved_claims_path = claims_path or os.getenv("BENCHMARK_CLAIMS_PATH", "benchmark_claims.json")
+    resolved_claims_path = (
+        claims_path
+        or os.getenv("CLAIMS_FILE")
+        or os.getenv("BENCHMARK_CLAIMS_PATH", "benchmark_claims.json")
+    )
     resolved_output_path = output_path or os.getenv("BENCHMARK_OUTPUT", "benchmark_results.json")
     resolved_api_url = api_url or os.getenv("API_URL", "http://localhost:8000")
     resolved_baseline = (
